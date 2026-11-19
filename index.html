@@ -62,7 +62,8 @@ p { margin: 0 0 .8em; }
   display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
   padding: .8rem clamp(1rem, 3vw, 2rem); background: var(--sheet); border-bottom: 1px solid var(--line);
 }
-.topbar .brand { font-weight: 700; font-size: 1.05rem; margin-right: auto; display: flex; align-items: center; gap: .5rem; }
+.topbar .brand { font-weight: 700; font-size: 1.05rem; margin-right: auto; display: flex; align-items: center; gap: .5rem; color: var(--ink); text-decoration: none; border-radius: 6px; }
+.topbar .brand:hover .brand-mark { transform: rotate(-4deg) scale(1.1); }
 .brand-mark { width: 22px; height: 22px; border-radius: 4px; background: var(--marker); display: inline-grid; place-items: center; font-size: .8rem; color: var(--ink); font-weight: 700; transform: rotate(-4deg); }
 .topbar .who { color: var(--muted); font-size: .9rem; }
 .tabs { display: flex; gap: .25rem; flex-wrap: wrap; padding: 0 clamp(1rem, 3vw, 2rem); background: var(--sheet); border-bottom: 1px solid var(--line); }
@@ -641,7 +642,11 @@ const CFG = Object.assign({
 const DEMO = !CFG.SUPABASE_URL || !CFG.SUPABASE_KEY;
 
 const USERNAME_RE = /^[a-z0-9._-]{2,24}$/;
-function studentEmail(username) { return String(username).trim().toLowerCase() + '@' + CFG.STUDENT_EMAIL_DOMAIN; }
+// Everyone logs in with a login name. Supabase needs an email, so we make a private one (no email is ever sent).
+function loginEmail(name) {
+  const n = String(name).trim().toLowerCase();
+  return n.includes('@') ? n : n + '@' + CFG.STUDENT_EMAIL_DOMAIN;
+}
 function newId() {
   if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -664,7 +669,7 @@ function friendly(err, context) {
   if (/invalid login credentials/i.test(msg)) {
     return new AppError(context === 'student'
       ? 'Wrong username or PIN. 用戶名稱或密碼不正確。'
-      : 'Wrong email or password.', 'login');
+      : 'Wrong login name or password.', 'login');
   }
   if (/already registered|already exists/i.test(msg)) return new AppError('That username is already taken. Choose another one.', 'taken');
   if (/password should be at least/i.test(msg)) return new AppError('The PIN or password is too short (at least 6 characters).', 'short');
@@ -695,20 +700,21 @@ class SupabaseBackend {
   }
   async teacherExists() { return await must(this.sb.rpc('teacher_exists')); }
   async signInStudent(username, pin) {
-    await must(this.sb.auth.signInWithPassword({ email: studentEmail(username), password: pin }), 'student');
+    await must(this.sb.auth.signInWithPassword({ email: loginEmail(username), password: pin }), 'student');
   }
-  async signInTeacher(email, password) {
-    await must(this.sb.auth.signInWithPassword({ email: email.trim(), password }), 'teacher');
+  async signInTeacher(login, password) {
+    await must(this.sb.auth.signInWithPassword({ email: loginEmail(login), password }), 'teacher');
   }
-  async createTeacher(name, email, password) {
-    const data = await must(this.sb.auth.signUp({ email: email.trim(), password }));
+  async createTeacher(name, login, password) {
+    const data = await must(this.sb.auth.signUp({ email: loginEmail(login), password }));
     if (!data.session) {
       throw new AppError('Your account was made, but Supabase wants an email confirmation. In Supabase go to Authentication → Sign In / Providers → Email, turn OFF "Confirm email", delete this user under Authentication → Users, and create the teacher account again.');
     }
-    try { await must(this.sb.rpc('claim_teacher', { p_name: name })); }
+    try { await must(this.sb.rpc('claim_teacher', { p_name: name, p_username: String(login).trim().toLowerCase() })); }
     catch (err) { await this.sb.auth.signOut(); throw err; }
   }
   async signOut() { await this.sb.auth.signOut(); }
+  async changePassword(newPassword) { await must(this.sb.auth.updateUser({ password: newPassword })); }
 
   /* students */
   async listStudents() {
@@ -718,7 +724,7 @@ class SupabaseBackend {
     const tmp = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY, {
       auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'student-signup' }
     });
-    const data = await must(tmp.auth.signUp({ email: studentEmail(username), password: pin }));
+    const data = await must(tmp.auth.signUp({ email: loginEmail(username), password: pin }));
     if (!data.user || !data.session) {
       throw new AppError('Supabase still has "Confirm email" turned on. Turn it off (Authentication → Sign In / Providers → Email), then add the student again.');
     }
@@ -814,7 +820,7 @@ class SupabaseBackend {
 }
 
 /* ------------------------------------------------------------------ */
-const DEMO_KEY = 'readaloud-demo-v1';
+const DEMO_KEY = 'readaloud-demo-v2';
 const DEMO_PASSAGE = `Last Saturday, my family and I went to Lantau Island. We took the MTR to Tung Chung. Then we took a cable car up the hill. The view was amazing. We could see the sea, the airport and many small boats.
 
 At the top, we visited the Big Buddha. There were more than two hundred steps! My legs were tired, but I was happy. For lunch, we ate noodles at a small shop. It was the best day of my month.`;
@@ -838,7 +844,7 @@ class DemoBackend {
     const now = Date.now(), iso = ms => new Date(now - ms).toISOString();
     this.db = {
       profiles: [
-        { id: t, role: 'teacher', display_name: 'Teacher', username: null, pass_mark: 90, active: true, created_at: iso(9e6) },
+        { id: t, role: 'teacher', display_name: 'Teacher', username: 'teacher', pass_mark: 90, active: true, created_at: iso(9e6), pin: 'demo1234' },
         { id: j, role: 'student', display_name: 'Jackson', username: 'jackson', pass_mark: 90, active: true, created_at: iso(9e6), pin: '111111' },
         { id: c, role: 'student', display_name: 'Chris', username: 'chris', pass_mark: 90, active: true, created_at: iso(9e6), pin: '222222' }
       ],
@@ -871,14 +877,20 @@ class DemoBackend {
   async teacherExists() { return true; }
   async signInStudent(username, pin) {
     await this._tick();
-    const p = this.db.profiles.find(x => x.role === 'student' && x.username === String(username).trim().toLowerCase() && x.pin === pin);
+    const p = this.db.profiles.find(x => x.username === String(username).trim().toLowerCase() && x.pin === pin);
     if (!p) throw new AppError('Wrong username or PIN. 用戶名稱或密碼不正確。', 'login');
     this._setUid(p.id);
   }
   async signInAs(id) { this._setUid(id); }
-  async signInTeacher() { await this._tick(); this._setUid('demo-teacher'); }
-  async createTeacher() { this._setUid('demo-teacher'); }
+  async signInTeacher(login, password) {
+    await this._tick();
+    const p = this.db.profiles.find(x => x.role === 'teacher' && x.username === String(login).trim().toLowerCase() && x.pin === password);
+    if (!p) throw new AppError('Wrong login name or password.', 'login');
+    this._setUid(p.id);
+  }
+  async createTeacher() { throw new AppError('The demo already has a teacher account.'); }
   async signOut() { this._setUid(null); }
+  async changePassword(newPassword) { this._me().pin = newPassword; this._save(); }
 
   _mine(list) { return this._copy(this._isTeacher() ? list : list.filter(x => x.student_id === this.uid)); }
   _copy(x) { return JSON.parse(JSON.stringify(x)); }
@@ -1340,7 +1352,8 @@ function frame(inner, { tabs, wide } = {}) {
   ].map(([k, l]) => `<a href="#/t/${k}" class="${tabs === k ? 'on' : ''}">${l}</a>`).join('')}</nav>` : '';
   return `${demoBar()}
     <header class="topbar">
-      <span class="brand"><span class="brand-mark">Aa</span>${esc(CFG.SITE_NAME)}</span>
+      <a class="brand" href="#/" data-act="brand" title="Back to the login page">
+        <span class="brand-mark">Aa</span>${esc(CFG.SITE_NAME)}</a>
       ${me ? `<span class="who">${esc(me.display_name || '')}</span><button class="btn small" data-act="logout">Log out <span class="zh">登出</span></button>` : ''}
     </header>
     ${tabHTML}
@@ -1411,7 +1424,6 @@ function viewLogin(error) {
       <div class="demo-logins">
         <button class="btn" data-act="demo-as" data-id="demo-jackson">Log in as Jackson (student)</button>
         <button class="btn" data-act="demo-as" data-id="demo-chris">Log in as Chris (student)</button>
-        <button class="btn" data-act="demo-as" data-id="demo-teacher">Log in as the teacher</button>
       </div></div>` : ''}
     <p class="small"><a href="#/teacher">Teacher login</a></p>
   </div>`;
@@ -1426,17 +1438,19 @@ async function viewTeacherLogin(error) {
     ${exists ? `
       <form class="sheet" data-form="teacher-login">
         ${error ? `<div class="error-box">${esc(error)}</div>` : ''}
-        <label class="field"><span>Email</span><input name="email" type="email" autocomplete="username" required></label>
+        <label class="field"><span>Login name</span><input name="login" autocapitalize="none" spellcheck="false" autocomplete="username" required></label>
         <label class="field"><span>Password</span><input name="password" type="password" autocomplete="current-password" required></label>
         <button class="btn primary big" style="width:100%">Log in</button>
       </form>` : `
       <form class="sheet" data-form="teacher-create">
         <h2>Create the teacher account</h2>
-        <p class="small muted">This is only shown once. The first account made here becomes the teacher.</p>
+        <p class="small muted">This is only shown once. The first account made here becomes the teacher, and nobody can make another one.</p>
         ${error ? `<div class="error-box">${esc(error)}</div>` : ''}
-        <label class="field"><span>Your name (shown on your pages)</span><input name="name" required></label>
-        <label class="field"><span>Email</span><input name="email" type="email" autocomplete="username" required></label>
+        <label class="field"><span>Your name (shown on your pages)</span><input name="name" required placeholder="Mr Chan"></label>
+        <label class="field"><span>Login name</span><input name="login" required autocapitalize="none" spellcheck="false" autocomplete="username" placeholder="e.g. john">
+          <span class="hint">Small letters and numbers only. Not the same as a student's username.</span></label>
         <label class="field"><span>Password (at least 8 characters)</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+        <label class="field"><span>Type the password again</span><input name="password2" type="password" minlength="8" autocomplete="new-password" required></label>
         <button class="btn primary big" style="width:100%">Create teacher account</button>
       </form>`}
     <p class="small"><a href="#/">Student login</a></p>
@@ -1740,8 +1754,14 @@ async function renderFileList() {
 const actions = {
   reload: () => (db ? render() : location.reload()),
   logout: async () => { cleanupView(); await db.signOut(); state.me = null; go('#/'); },
+  brand: async () => {
+    if (!state.me) { go('#/'); return; }
+    if (state.rec) return; // don't leave in the middle of reading
+    if (!confirm('Log out and go back to the login page?\n登出並返回登入頁面？')) return;
+    await actions.logout();
+  },
   'demo-reset': async () => { if (confirm('Reset the demo? Everything you added will be removed.')) { db.reset(); await db.signOut(); state.me = null; go('#/'); } },
-  'demo-as': async el => { await db.signInAs(el.dataset.id); state.me = null; go(el.dataset.id === 'demo-teacher' ? '#/t/progress' : '#/'); },
+  'demo-as': async el => { if (!/^demo-(jackson|chris)$/.test(el.dataset.id)) return; await db.signInAs(el.dataset.id); state.me = null; go('#/'); },
   say: el => Speech.speak(el.dataset.text, { rate: Math.min(state.rate, 0.85), lang: CFG.SPEECH_LANG }),
   'close-sheet': () => closeWordSheet(),
   rate: el => {
@@ -1794,7 +1814,7 @@ const forms = {
   'teacher-login': async f => {
     const fd = new FormData(f);
     await busy($('button', f), async () => {
-      try { await db.signInTeacher(String(fd.get('email')), String(fd.get('password'))); }
+      try { await db.signInTeacher(String(fd.get('login') || ''), String(fd.get('password') || '')); }
       catch (err) { viewTeacherLogin(err.message); return; }
       state.me = null; go('#/t/progress');
     });
@@ -1802,7 +1822,11 @@ const forms = {
   'teacher-create': async f => {
     const fd = new FormData(f);
     await busy($('button', f), async () => {
-      try { await db.createTeacher(String(fd.get('name')), String(fd.get('email')), String(fd.get('password'))); }
+      const login = String(fd.get('login') || '').trim().toLowerCase(), pw = String(fd.get('password') || '');
+      if (!USERNAME_RE.test(login)) { viewTeacherLogin('The login name can only have small letters, numbers, dots, dashes and underscores.'); return; }
+      if (pw.length < 8) { viewTeacherLogin('The password needs at least 8 characters.'); return; }
+      if (pw !== String(fd.get('password2') || '')) { viewTeacherLogin('The two passwords are not the same.'); return; }
+      try { await db.createTeacher(String(fd.get('name')).trim(), login, pw); }
       catch (err) { viewTeacherLogin(err.message); return; }
       state.me = null; go('#/t/progress');
     });
@@ -2180,6 +2204,15 @@ async function viewStudents() {
         </div>
         <div class="form-actions"><button class="btn primary">Add student</button></div>
       </form>
+    </section>
+    <section class="sheet">
+      <h2>Your teacher account</h2>
+      <p>You log in with the login name <b>${esc(state.me.username || '')}</b>. Students can't open these pages without your password.</p>
+      <form data-form="teacher-password" class="grid2">
+        <label class="field"><span>New password (at least 8 characters)</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+        <label class="field"><span>Type it again</span><input name="password2" type="password" minlength="8" autocomplete="new-password" required></label>
+        <div class="form-actions"><button class="btn">Change password</button></div>
+      </form>
     </section>`, { tabs: 'students', wide: true });
 }
 
@@ -2340,6 +2373,12 @@ Object.assign(forms, {
   'student-pm': async f => {
     const v = Math.max(0, Math.min(100, Number(new FormData(f).get('pass_mark'))));
     await busy($('button', f), async () => { await db.updateStudent(f.dataset.id, { pass_mark: v }); toast('Pass mark saved'); });
+  },
+  'teacher-password': async f => {
+    const fd = new FormData(f), pw = String(fd.get('password') || '');
+    if (pw.length < 8) { toast('The password needs at least 8 characters.', true); return; }
+    if (pw !== String(fd.get('password2') || '')) { toast('The two passwords are not the same.', true); return; }
+    await busy($('button', f), async () => { await db.changePassword(pw); f.reset(); toast('Password changed'); });
   },
   'rule-add': async f => {
     const fd = new FormData(f);
