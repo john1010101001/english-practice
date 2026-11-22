@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1c2a43">
+<title>English Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&display=swap">
+<style>
+:root {
+  --desk: #e7edf4;
+  --sheet: #ffffff;
+  --ink: #1c2a43;
+  --ink-2: #44526b;
+  --muted: #74819a;
+  --line: #d3dbe6;
+  --line-2: #e6ebf2;
+  --blue: #2457c5;
+  --blue-dark: #1a439d;
+  --blue-wash: #e8effc;
+  --marker: #ffe25c;
+  --pen: #c8102e;
+  --pen-wash: #fde9ec;
+  --tick: #17804f;
+  --tick-wash: #e3f4ea;
+  --amber: #a35b00;
+  --amber-wash: #fff2dc;
+  --font: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', 'PingFang HK', 'Microsoft JhengHei', 'Noto Sans TC', sans-serif;
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --shadow: 0 1px 0 rgba(28, 42, 67, .06), 0 6px 18px -10px rgba(28, 42, 67, .25);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--desk); color: var(--ink);
+  font-family: var(--font); font-size: 17px; line-height: 1.55;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--blue); }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .4em; }
+h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -.01em; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+h3 { font-size: 1.08rem; font-weight: 700; }
+p { margin: 0 0 .8em; }
+.zh { font-weight: 400; color: var(--ink-2); }
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+.hidden { display: none !important; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+
+/* ---------- layout ---------- */
+.demo-bar {
+  background: var(--ink); color: #fff; font-size: .85rem; padding: .45rem 1rem; text-align: center;
+}
+.demo-bar a { color: var(--marker); }
+.topbar {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  padding: .8rem clamp(1rem, 3vw, 2rem); background: var(--sheet); border-bottom: 1px solid var(--line);
+}
+.topbar .brand { font-weight: 700; font-size: 1.05rem; margin-right: auto; display: flex; align-items: center; gap: .5rem; color: var(--ink); text-decoration: none; border-radius: 6px; }
+.topbar .brand:hover .brand-mark { transform: rotate(-4deg) scale(1.1); }
+.brand-mark { width: 22px; height: 22px; border-radius: 4px; background: var(--marker); display: inline-grid; place-items: center; font-size: .8rem; color: var(--ink); font-weight: 700; transform: rotate(-4deg); }
+.topbar .who { color: var(--muted); font-size: .9rem; }
+.tabs { display: flex; gap: .25rem; flex-wrap: wrap; padding: 0 clamp(1rem, 3vw, 2rem); background: var(--sheet); border-bottom: 1px solid var(--line); }
+.tabs a {
+  text-decoration: none; color: var(--ink-2); padding: .65rem .85rem; border-bottom: 3px solid transparent; font-weight: 600; font-size: .95rem;
+}
+.tabs a.on { color: var(--ink); border-bottom-color: var(--blue); }
+.wrap { max-width: 760px; margin: 0 auto; padding: clamp(1rem, 4vw, 2.2rem) clamp(.9rem, 3vw, 1.5rem) 4rem; }
+.wrap.wide { max-width: 1120px; }
+.sheet { background: var(--sheet); border-radius: var(--radius-m); box-shadow: var(--shadow); padding: clamp(1.1rem, 3.5vw, 2rem); margin-bottom: 1.2rem; }
+.section { margin-bottom: 2rem; }
+.row { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.row.top { align-items: flex-start; }
+.spacer { flex: 1; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.back { display: inline-flex; gap: .4rem; align-items: center; text-decoration: none; font-weight: 600; margin-bottom: 1rem; }
+
+/* ---------- buttons & forms ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  border: 1.5px solid var(--line); background: var(--sheet); color: var(--ink);
+  border-radius: 999px; padding: .55rem 1.1rem; font-weight: 600; cursor: pointer; text-decoration: none;
+  min-height: 44px; line-height: 1.2;
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn.primary:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+.btn.danger { color: var(--pen); border-color: #efc2ca; }
+.btn.small { min-height: 34px; padding: .3rem .8rem; font-size: .88rem; }
+.btn.big { font-size: 1.15rem; padding: .8rem 1.5rem; min-height: 56px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
+.linkbtn { background: none; border: 0; color: var(--blue); cursor: pointer; padding: 0; font-weight: 600; text-decoration: underline; }
+
+label.field { display: block; margin-bottom: .9rem; }
+label.field > span { display: block; font-weight: 600; margin-bottom: .3rem; }
+input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], input:not([type]), select, textarea {
+  width: 100%; border: 1.5px solid var(--line); border-radius: var(--radius-s); padding: .6rem .7rem; background: #fff; min-height: 44px;
+}
+textarea { min-height: 8rem; resize: vertical; line-height: 1.6; }
+input:focus, select:focus, textarea:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px var(--blue-wash); }
+.check { display: flex; gap: .55rem; align-items: center; margin-bottom: .9rem; cursor: pointer; }
+.check input { width: 20px; height: 20px; }
+.hint { font-size: .86rem; color: var(--muted); margin-top: .25rem; }
+.form-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; }
+.error-box { background: var(--pen-wash); color: #8c0b20; border-radius: var(--radius-s); padding: .7rem .9rem; margin-bottom: 1rem; }
+.note-box { background: var(--blue-wash); border-radius: var(--radius-s); padding: .8rem 1rem; margin-bottom: 1rem; font-size: .95rem; }
+.warn-box { background: var(--amber-wash); color: #6b3c00; border-radius: var(--radius-s); padding: .8rem 1rem; margin-bottom: 1rem; }
+
+/* ---------- login ---------- */
+.login { max-width: 440px; margin: clamp(1.5rem, 8vh, 5rem) auto; padding: 0 1rem; }
+.login h1 { font-size: 2.1rem; }
+.login .pin { letter-spacing: .4em; font-size: 1.4rem; text-align: center; }
+.demo-logins { display: grid; gap: .5rem; margin-top: 1rem; }
+
+/* ---------- status chips ---------- */
+.chip { display: inline-flex; align-items: center; gap: .3rem; border-radius: 999px; padding: .1rem .65rem; font-size: .85rem; font-weight: 600; white-space: nowrap; }
+.chip.todo { background: var(--line-2); color: var(--ink-2); }
+.chip.again { background: var(--amber-wash); color: var(--amber); }
+.chip.pass { background: var(--tick-wash); color: var(--tick); }
+.chip.info { background: var(--blue-wash); color: var(--blue-dark); }
+.chip.fail { background: var(--pen-wash); color: var(--pen); }
+
+/* ---------- student task list ---------- */
+.greeting h1 { font-size: clamp(2rem, 6vw, 2.6rem); margin-bottom: .1rem; }
+.tasklist { list-style: none; margin: 0 0 2rem; padding: 0; display: grid; gap: .7rem; }
+.tasklist a {
+  display: grid; grid-template-columns: 8px 1fr auto; gap: 0 1rem; align-items: center;
+  background: var(--sheet); border-radius: var(--radius-m); box-shadow: var(--shadow);
+  text-decoration: none; color: var(--ink); padding: 1rem 1.1rem 1rem 0; overflow: hidden;
+}
+.tasklist .stripe { align-self: stretch; background: var(--line); border-radius: 0 4px 4px 0; }
+.tasklist .s-again .stripe { background: #f0b357; }
+.tasklist .s-pass .stripe { background: var(--tick); }
+.tasklist .s-todo .stripe { background: var(--blue); }
+.tasklist .t-title { font-weight: 700; font-size: 1.12rem; }
+.tasklist .t-meta { color: var(--muted); font-size: .9rem; display: flex; gap: .4rem .9rem; flex-wrap: wrap; margin-top: .15rem; }
+
+/* ---------- the passage ---------- */
+.passage {
+  font-size: clamp(1.25rem, 2.7vw, 1.6rem); line-height: 2.15; word-spacing: .08em;
+  max-width: 62ch; color: var(--ink);
+}
+.passage p { margin: 0 0 .9em; }
+.passage .title { font-weight: 700; font-size: 1.1em; }
+.w { position: relative; border-radius: 3px; padding: .05em .06em; margin: 0 -.06em; cursor: pointer; transition: background-color .25s; }
+.passage.locked .w { cursor: default; }
+.w.gloss { text-decoration: underline dotted var(--blue); text-decoration-thickness: 2px; text-underline-offset: .28em; }
+.w.ok {
+  background-image: linear-gradient(100deg, rgba(255, 226, 92, 0) .5%, rgba(255, 226, 92, .95) 3%, rgba(255, 226, 92, .75) 50%, rgba(255, 226, 92, .9) 97%, rgba(255, 226, 92, 0) 99.5%);
+  background-size: 100% 78%; background-position: 0 60%; background-repeat: no-repeat;
+}
+.w.wrong { color: var(--pen); text-decoration: underline wavy var(--pen); text-decoration-thickness: 1.5px; text-underline-offset: .3em; }
+.w.missed { color: var(--pen); text-decoration: underline dotted var(--pen); text-decoration-thickness: 2px; text-underline-offset: .3em; }
+.w.unread { color: var(--muted); text-decoration: underline dotted var(--muted); text-decoration-thickness: 2px; text-underline-offset: .3em; }
+.w.speaking { background-color: #d7e4fb; }
+.w .heard {
+  position: absolute; left: 0; top: -1.15em; font-size: .5em; line-height: 1; white-space: nowrap;
+  color: var(--pen); font-weight: 700; background: #fff; padding: 1px 3px; border-radius: 3px; border: 1px solid #f3c6cd;
+}
+.live-cursor { display: inline-block; width: 3px; height: 1.05em; background: var(--blue); vertical-align: -.15em; margin-left: .1em; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.legend { display: flex; gap: .4rem 1.2rem; flex-wrap: wrap; font-size: .9rem; color: var(--ink-2); margin: .3rem 0 1rem; }
+.legend .w { cursor: default; }
+
+/* ---------- read-aloud controls ---------- */
+.readbar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.2rem; }
+.seg { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { border: 0; background: #fff; padding: .45rem .9rem; cursor: pointer; font-weight: 600; min-height: 40px; }
+.seg button.on { background: var(--ink); color: #fff; }
+.recorder { display: flex; flex-direction: column; align-items: center; gap: .7rem; padding: 1.4rem 0 .4rem; border-top: 1px solid var(--line-2); margin-top: 1rem; text-align: center; }
+.recbtn {
+  width: 104px; height: 104px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: var(--pen); color: #fff; box-shadow: 0 8px 20px -8px rgba(200, 16, 46, .7); position: relative;
+}
+.recbtn svg { width: 44px; height: 44px; }
+.recbtn.on { background: var(--ink); box-shadow: 0 8px 20px -8px rgba(28, 42, 67, .7); }
+.recbtn.on::after {
+  content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 3px solid var(--pen); animation: ring 1.4s ease-out infinite;
+}
+@keyframes ring { from { transform: scale(.92); opacity: 1; } to { transform: scale(1.18); opacity: 0; } }
+.reclabel { font-weight: 700; font-size: 1.15rem; }
+.rectime { font-variant-numeric: tabular-nums; color: var(--muted); }
+
+/* ---------- result ---------- */
+.result { border-top: 1px solid var(--line-2); margin-top: 1rem; padding-top: 1.4rem; }
+.score-line { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: .6rem; }
+.score-big { font-size: clamp(3.4rem, 12vw, 4.8rem); font-weight: 700; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.result.pass .score-big { background: linear-gradient(transparent 58%, var(--marker) 58%, var(--marker) 92%, transparent 92%); padding: 0 .1em; }
+.verdict { font-size: 1.5rem; font-weight: 700; }
+.result.pass .verdict { color: var(--tick); }
+.result.fail .verdict { color: var(--pen); }
+.practice-words { display: flex; flex-wrap: wrap; gap: .5rem; margin: .6rem 0 1.2rem; }
+.practice-words button {
+  border: 1.5px solid #f1c2ca; background: var(--pen-wash); color: var(--pen); border-radius: 999px;
+  padding: .35rem .9rem; font-weight: 700; cursor: pointer; font-size: 1.05rem; min-height: 40px;
+}
+.save-state { font-size: .9rem; color: var(--muted); margin-top: .8rem; }
+.save-state.bad { color: var(--pen); }
+.save-state.good { color: var(--tick); }
+
+/* ---------- word sheet (tap a word) ---------- */
+.wordsheet {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); width: min(520px, calc(100% - 1.5rem));
+  background: var(--ink); color: #fff; border-radius: 14px; padding: 1rem 1.1rem; z-index: 50;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .5); display: flex; gap: 1rem; align-items: center;
+}
+.wordsheet .ws-word { font-size: 1.6rem; font-weight: 700; }
+.wordsheet .ws-mean { color: #d8e2f3; font-size: 1.05rem; }
+.wordsheet .ws-heard { color: #ffc2cb; font-size: .95rem; }
+.wordsheet button { background: var(--marker); color: var(--ink); border: 0; border-radius: 999px; padding: .55rem 1rem; font-weight: 700; cursor: pointer; min-height: 44px; }
+.wordsheet .ws-close { background: transparent; color: #fff; font-size: 1.4rem; padding: 0 .4rem; }
+
+/* ---------- questions ---------- */
+.exercise { white-space: pre-wrap; font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.9; max-width: 62ch; }
+
+/* ---------- upload ---------- */
+.dropzone { border: 2px dashed var(--line); border-radius: var(--radius-m); padding: 1.3rem; text-align: center; }
+.filelist { list-style: none; padding: 0; margin: .8rem 0 0; display: grid; gap: .6rem; }
+.filelist li { border: 1px solid var(--line); border-radius: var(--radius-s); padding: .7rem .9rem; }
+.feedback { margin-top: .5rem; background: var(--tick-wash); border-radius: var(--radius-s); padding: .6rem .8rem; white-space: pre-wrap; }
+
+/* ---------- teacher tables ---------- */
+.tbl { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tbl th { text-align: left; font-weight: 700; color: var(--ink-2); padding: .55rem .6rem; border-bottom: 2px solid var(--line); white-space: nowrap; }
+.tbl td { padding: .65rem .6rem; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tblwrap { overflow-x: auto; margin: 0 -.3rem; }
+.tries { display: flex; gap: .25rem; flex-wrap: wrap; align-items: center; }
+.tries span { font-variant-numeric: tabular-nums; font-size: .82rem; padding: 0 .35rem; border-radius: 4px; background: var(--line-2); }
+.tries span.p { background: var(--tick-wash); color: var(--tick); font-weight: 700; }
+.student-head { display: flex; align-items: baseline; gap: .4rem 1rem; flex-wrap: wrap; margin-bottom: .8rem; }
+.student-head h2 { margin: 0; }
+.stats { display: flex; gap: 1.6rem; flex-wrap: wrap; margin: .3rem 0 1rem; }
+.stat b { display: block; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: .85rem; color: var(--muted); }
+.feed { list-style: none; margin: 0; padding: 0; }
+.feed li { padding: .55rem 0; border-bottom: 1px solid var(--line-2); display: flex; gap: .8rem; flex-wrap: wrap; align-items: baseline; }
+.feed li:last-child { border-bottom: 0; }
+.feed time { color: var(--muted); font-size: .85rem; min-width: 7.5rem; }
+.attempt { border: 1px solid var(--line); border-radius: var(--radius-m); margin-bottom: .8rem; }
+.attempt > summary { list-style: none; cursor: pointer; padding: .8rem 1rem; display: flex; gap: .5rem 1rem; align-items: center; flex-wrap: wrap; }
+.attempt > summary::-webkit-details-marker { display: none; }
+.attempt[open] > summary { border-bottom: 1px solid var(--line-2); }
+.attempt .body { padding: 1rem; }
+.attempt .passage { font-size: 1.15rem; line-height: 2.4; max-width: none; }
+.transcript { background: var(--line-2); border-radius: var(--radius-s); padding: .6rem .8rem; font-size: .95rem; }
+.inline-form { display: flex; gap: .5rem; flex-wrap: wrap; align-items: flex-end; }
+.inline-form label.field { margin: 0; }
+.inline-form input[type=number] { width: 7rem; }
+
+dialog { border: 0; border-radius: var(--radius-m); padding: 1.4rem; max-width: min(440px, calc(100% - 2rem)); box-shadow: 0 20px 50px -15px rgba(0, 0, 0, .45); }
+dialog::backdrop { background: rgba(28, 42, 67, .45); }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%); z-index: 60;
+  background: var(--ink); color: #fff; padding: .7rem 1.1rem; border-radius: 999px; font-weight: 600; box-shadow: var(--shadow);
+  max-width: calc(100% - 2rem);
+}
+.toast.bad { background: var(--pen); }
+.spinner { display: inline-block; width: 1em; height: 1em; border: 2.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -.15em; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading { padding: 3rem; text-align: center; color: var(--muted); }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .tabs a { padding: .55rem .6rem; font-size: .9rem; }
+  .tbl.stack thead { display: none; }
+  .tbl.stack tr { display: block; border-bottom: 1px solid var(--line); padding: .4rem 0; }
+  .tbl.stack td { display: flex; gap: .6rem; border: 0; padding: .25rem .2rem; }
+  .tbl.stack td::before { content: attr(data-l); font-weight: 700; color: var(--ink-2); min-width: 6.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+</style>
+<!-- Your settings (Supabase keys, site name). Edit config.js, not this file. -->
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div id="app"><div class="loading">Loading…</div></div>
+<noscript>Please turn on JavaScript to use this website.</noscript>
+<script>
+/* English Read-Aloud Practice — version 2026-11-22
+   One file for the whole website. Settings live in config.js. */
+document.title = (window.APP_CONFIG && window.APP_CONFIG.SITE_NAME) || 'English Practice';
+/* =====================================================================
+   Read-aloud scoring
+   Compares the passage with what the speech recognition heard,
+   word by word, and gives a percentage.
+   - Numbers, contractions, British/American spelling and homophones
+     ("two" / "too", "read" / "red") are treated as the same word,
+     because the recogniser cannot hear the difference.
+   - The teacher can add "accepted words" for one student or for all.
+   - Extra words (repeats, "um") are shown but do not lower the score.
+   ===================================================================== */
+const Scoring = (() => {
+  const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+    'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+  const TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+  function numberWords(n) {
+    n = Math.floor(n);
+    if (!isFinite(n) || n < 0) return String(n);
+    if (n < 20) return ONES[n];
+    if (n < 100) return TENS[Math.floor(n / 10)] + (n % 10 ? ' ' + ONES[n % 10] : '');
+    if (n < 1000) return ONES[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' and ' + numberWords(n % 100) : '');
+    const units = [[1e9, 'billion'], [1e6, 'million'], [1e3, 'thousand']];
+    for (const [size, name] of units) {
+      if (n >= size) {
+        const rest = n % size;
+        return numberWords(Math.floor(n / size)) + ' ' + name +
+          (rest ? (rest < 100 ? ' and ' : ' ') + numberWords(rest) : '');
+      }
+    }
+    return String(n);
+  }
+
+  const ORD = { one: 'first', two: 'second', three: 'third', five: 'fifth', eight: 'eighth', nine: 'ninth', twelve: 'twelfth' };
+  function ordinalWords(n) {
+    const w = numberWords(n).split(' ');
+    const last = w.pop();
+    w.push(ORD[last] || (last.endsWith('y') ? last.slice(0, -1) + 'ieth' : last + 'th'));
+    return w.join(' ');
+  }
+
+  const CONTRACTIONS = {
+    "i'm": 'i am', "you're": 'you are', "we're": 'we are', "they're": 'they are', "he's": 'he is', "she's": 'she is',
+    "it's": 'it is', "that's": 'that is', "there's": 'there is', "here's": 'here is', "what's": 'what is',
+    "where's": 'where is', "who's": 'who is', "how's": 'how is', "let's": 'let us',
+    "i've": 'i have', "you've": 'you have', "we've": 'we have', "they've": 'they have', "could've": 'could have',
+    "would've": 'would have', "should've": 'should have', "might've": 'might have', "must've": 'must have',
+    "i'll": 'i will', "you'll": 'you will', "he'll": 'he will', "she'll": 'she will', "it'll": 'it will',
+    "we'll": 'we will', "they'll": 'they will', "that'll": 'that will', "there'll": 'there will',
+    "i'd": 'i would', "you'd": 'you would', "he'd": 'he would', "she'd": 'she would', "we'd": 'we would',
+    "they'd": 'they would', "it'd": 'it would',
+    "can't": 'can not', cannot: 'can not', "won't": 'will not', "shan't": 'shall not', "ain't": 'is not',
+    gonna: 'going to', wanna: 'want to', gotta: 'got to'
+  };
+
+  // Spellings that sound the same (British / American and other variants)
+  const SAME = [
+    ['ok', 'okay'], ['mr', 'mister'], ['mrs', 'missus'], ['dr', 'doctor'], ['mum', 'mom', 'mam', 'mummy', 'mommy'],
+    ['grey', 'gray'], ['programme', 'program'], ['programmes', 'programs'], ['tyre', 'tire'], ['tyres', 'tires'],
+    ['kerb', 'curb'], ['cheque', 'check'], ['jewellery', 'jewelry'], ['licence', 'license'], ['defence', 'defense'],
+    ['offence', 'offense'], ['pyjamas', 'pajamas'], ['aluminium', 'aluminum'], ['plough', 'plow'], ['mould', 'mold'],
+    ['storey', 'story'], ['storeys', 'stories'], ['towards', 'toward'], ['amongst', 'among'], ['whilst', 'while'],
+    ['learnt', 'learned'], ['spelt', 'spelled'], ['dreamt', 'dreamed'], ['burnt', 'burned'], ['smelt', 'smelled'],
+    ['spoilt', 'spoiled'], ['leapt', 'leaped'], ['enrol', 'enroll'], ['fulfil', 'fulfill'], ['skilful', 'skillful'],
+    ['practise', 'practice'], ['practised', 'practiced'], ['practising', 'practicing'], ['donut', 'doughnut']
+  ];
+  const OUR_STEMS = ['colour', 'favour', 'flavour', 'honour', 'humour', 'labour', 'neighbour', 'behaviour', 'harbour',
+    'rumour', 'vapour', 'savour', 'odour', 'armour', 'endeavour', 'glamour', 'parlour', 'rigour', 'splendour',
+    'valour', 'vigour', 'tumour', 'saviour'];
+  const LL_STEMS = ['travel', 'cancel', 'label', 'model', 'level', 'quarrel', 'signal', 'fuel', 'counsel', 'marvel',
+    'channel', 'dial', 'total', 'tunnel', 'panel', 'jewel', 'rival', 'equal', 'funnel', 'shovel', 'snorkel', 'duel',
+    'pedal', 'label', 'worship', 'kidnap'];
+  const LL_RE = new RegExp('^(' + LL_STEMS.join('|') + ')(l|p)?(ed|ing|er|ers)$');
+
+  // Words the recogniser cannot tell apart (homophones)
+  const HOMOPHONES = [
+    'to too two', 'there their', 'for four fore', 'by buy bye', 'no know', 'new knew', 'right write rite',
+    'here hear', 'see sea', 'one won', 'eight ate', 'son sun', 'meet meat', 'weak week', 'whole hole',
+    'hour our', 'wear where ware', 'weather whether', 'peace piece', 'plane plain', 'road rode rowed',
+    'sale sail', 'tail tale', 'flour flower', 'mail male', 'pair pear pare', 'break brake', 'blew blue',
+    'cell sell', 'dear deer', 'fair fare', 'hair hare', 'heal heel', 'made maid', 'not knot', 'nose knows',
+    'passed past', 'red read', 'steal steel', 'stair stare', 'threw through', 'waist waste', 'wait weight',
+    'way weigh', 'which witch', 'wood would', 'allowed aloud', 'board bored', 'cent scent sent',
+    'die dye', 'i eye', 'be bee', 'in inn', 'missed mist', 'oh owe', 'role roll', 'sew so sow', 'some sum',
+    'tide tied', 'toe tow', 'whale wail', 'worn warn', 'rain reign rein', 'real reel', 'ring wring',
+    'find fined', 'guessed guest', 'higher hire', 'knight night', 'lead led', 'seen scene', 'soul sole',
+    'stake steak', 'grate great', 'groan grown', 'hall haul', 'heard herd', 'hi high', 'him hymn',
+    'hoarse horse', 'key quay', 'lessen lesson', 'loan lone', 'morning mourning', 'none nun', 'pain pane',
+    'pause paws', 'poor pour pore', 'pray prey', 'principal principle', 'rap wrap', 'rays raise',
+    'sight site cite', 'stationary stationery', 'suite sweet', 'tea tee', 'throne thrown', 'vain vein',
+    'yolk yoke', 'bare bear', 'ball bawl', 'billed build', 'bread bred', 'ceiling sealing', 'chews choose',
+    'course coarse', 'days daze', 'flew flu flue', 'gate gait', 'hay hey', 'maize maze', 'meddle medal',
+    'pole poll', 'rose rows', 'sees seas seize', 'tax tacks', 'we wee', 'you ewe yew u', 'are r', 'why y',
+    'too 2', 'boy buoy', 'cereal serial', 'dew due', 'fir fur', 'gorilla guerrilla', 'hey hay', 'idle idol',
+    'jeans genes', 'mane main', 'mince mints', 'minor miner', 'naval navel', 'pail pale', 'peak peek',
+    'plum plumb', 'profit prophet', 'rest wrest', 'sauce source', 'scent sent', 'serf surf', 'shoe shoo',
+    'sun son', 'tear tier', 'thyme time', 'wheel weal', 'whine wine', 'whirled world', 'wholly holy',
+    'yore your'
+  ];
+  // Pairs of words that the recogniser may write as one word (and the other way round)
+  const PAIR_SAME = [['its', 'it is'], ['your', 'you are'], ['their', 'they are'], ['there', 'they are'],
+    ['whose', 'who is'], ['lets', 'let us'], ['cannot', 'can not'], ['into', 'in to'], ['onto', 'on to'],
+    ['maybe', 'may be'], ['everyday', 'every day'], ['anyway', 'any way'], ['alright', 'all right'],
+    ['percent', 'per cent'], ['hongkong', 'hong kong'], ['hk', 'hong kong'], ['oclock', 'o clock']];
+
+  const SAME_MAP = {};
+  SAME.forEach(group => { const head = group[0]; group.forEach(w => { if (!w.includes(' ')) SAME_MAP[w] = head; }); });
+
+  function canon(w) {
+    if (SAME_MAP[w]) return SAME_MAP[w];
+    let c = w;
+    for (const stem of OUR_STEMS) {
+      if (c.startsWith(stem)) { c = stem.replace(/our$/, 'or') + c.slice(stem.length); break; }
+    }
+    const ll = c.match(LL_RE);
+    if (ll) c = ll[1] + ll[3];
+    if (c.length >= 6) {
+      c = c.replace(/isation(s?)$/, 'ization$1')
+        .replace(/is(e|ed|es|ing|er|ers)$/, 'iz$1')
+        .replace(/ys(e|ed|es|ing)$/, 'yz$1');
+    }
+    if (c.length >= 5) c = c.replace(/tre(s?)$/, 'ter$1').replace(/logue(s?)$/, 'log$1');
+    return SAME_MAP[c] || c;
+  }
+
+  const HOMO = {};
+  HOMOPHONES.forEach((g, gi) => g.split(' ').forEach(w => { HOMO[canon(w)] = HOMO[canon(w)] ?? gi; }));
+  const PAIR_MAP = {};   // "it is" -> ["its"]
+  PAIR_SAME.forEach(([one, two]) => { (PAIR_MAP[two] = PAIR_MAP[two] || []).push(canon(one)); });
+  function keyEq(k1, k2) {
+    if (k1 === k2) return true;
+    const h = HOMO[k1];
+    return h !== undefined && h === HOMO[k2];
+  }
+
+  const CURRENCY = { '$': 'dollars', '£': 'pounds', '€': 'euros', '¥': 'yen' };
+
+  function normaliseText(s) {
+    return String(s || '').toLowerCase()
+      .replace(/[‘’ʼ`´]/g, "'")
+      .replace(/[“”«»]/g, '"')
+      .replace(/&/g, ' and ')
+      .replace(/(\d),(?=\d{3}(?!\d))/g, '$1')
+      .replace(/(^|[^\d])(\d{1,2}):(\d{2})(?!\d)/g, (m, pre, h, mm) => pre + ' ' + numberWords(+h) + ' ' +
+        (mm === '00' ? 'oclock' : (mm[0] === '0' ? 'oh ' + ONES[+mm[1]] : numberWords(+mm))) + ' ')
+      .replace(/(\d+)(st|nd|rd|th)(?![a-z])/g, (m, n) => ' ' + ordinalWords(+n) + ' ')
+      .replace(/(?:hk|us)?([$£€¥])\s?(\d+(?:\.\d+)?)/g, (m, sym, n) => ' ' + n + ' ' + CURRENCY[sym] + ' ')
+      .replace(/(\d+(?:\.\d+)?)\s?%/g, '$1 percent ')
+      .replace(/(\d+)\.(\d+)/g, (m, a, b) => ' ' + numberWords(+a) + ' point ' + b.split('').map(d => ONES[+d]).join(' ') + ' ')
+      .replace(/\d+/g, m => ' ' + numberWords(+m) + ' ')
+      .replace(/[-‐-―/_]/g, ' ');
+  }
+
+  // Text -> list of plain words ("don't" -> "do", "not")
+  function tokens(s) {
+    const out = [];
+    for (let raw of normaliseText(s).split(/\s+/)) {
+      raw = raw.replace(/[^\p{L}']/gu, '').replace(/^'+|'+$/g, '');
+      if (!raw) continue;
+      let parts;
+      if (CONTRACTIONS[raw]) parts = CONTRACTIONS[raw].split(' ');
+      else if (/n't$/.test(raw)) parts = [raw.slice(0, -3), 'not'];
+      else parts = [raw];
+      for (const p of parts) {
+        const w = p.replace(/'/g, '');
+        if (w) out.push(w);
+      }
+    }
+    return out;
+  }
+
+  // Passage -> display words (keeps punctuation for showing) with their plain words
+  const passageCache = new Map();
+  function passageWords(text) {
+    if (passageCache.has(text)) return passageCache.get(text);
+    const lines = String(text || '').replace(/\r/g, '').split('\n');
+    const words = [];
+    lines.forEach((line, li) => {
+      const parts = line.split(/\s+/).filter(Boolean);
+      parts.forEach((p, pi) => {
+        let toks;
+        if (/^no\.$/i.test(p) && parts[pi + 1] && /^\d/.test(parts[pi + 1])) toks = ['number'];
+        else toks = tokens(p);
+        words.push({ text: p, tokens: toks, line: li });
+      });
+    });
+    const result = { words, lineCount: lines.length };
+    if (passageCache.size > 50) passageCache.clear();
+    passageCache.set(text, result);
+    return result;
+  }
+
+  function buildAccepted(list) {
+    const single = new Set();   // "expectedKey|heardKey"
+    const split = new Set();    // expected one word, heard two: "exp|h1 h2"
+    const merge = new Set();    // expected two words, heard one: "e1 e2|heard"
+    (list || []).forEach(r => {
+      const e = tokens(r.expected).map(canon), h = tokens(r.heard).map(canon);
+      if (!e.length || !h.length) return;
+      if (e.length === 1 && h.length === 1) single.add(e[0] + '|' + h[0]);
+      else if (e.length === 1 && h.length === 2) split.add(e[0] + '|' + h.join(' '));
+      else if (e.length === 2 && h.length === 1) merge.add(e.join(' ') + '|' + h[0]);
+    });
+    return { single, split, merge };
+  }
+
+  function makeToken(w) { return { w, k: canon(w) }; }
+
+  // For a pair of words: every single word they could be heard as
+  function pairTargets(w1, w2, k1, k2, extra) {
+    const set = new Set([canon(w1 + w2), k1 + k2]);
+    (PAIR_MAP[k1 + ' ' + k2] || []).forEach(x => set.add(x));
+    if (extra) extra.forEach(x => set.add(x));
+    return set;
+  }
+  function inTargets(set, k) {
+    if (!set) return false;
+    if (set.has(k)) return true;
+    const h = HOMO[k];
+    if (h === undefined) return false;
+    for (const x of set) if (HOMO[x] === h) return true;
+    return false;
+  }
+
+  // Word-level alignment (edit distance with merges and splits)
+  function align(exp, rec, acc) {
+    const n = exp.length, m = rec.length, W = m + 1;
+    // integer ids make the inner loop fast
+    const ids = new Map();
+    const idOf = k => { let v = ids.get(k); if (v === undefined) { v = ids.size; ids.set(k, v); } return v; };
+    const eId = exp.map(t => idOf(t.k)), rId = rec.map(t => idOf(t.k));
+    const eG = exp.map(t => HOMO[t.k] ?? -1), rG = rec.map(t => HOMO[t.k] ?? -1);
+    const accSingle = new Set();
+    acc.single.forEach(s => { const [a, b] = s.split('|'); accSingle.add(idOf(a) * 1e6 + idOf(b)); });
+    const hasAcc = accSingle.size > 0;
+    const accFor = (map, key) => { const out = []; map.forEach(s => { const [a, b] = s.split('|'); if (a === key) out.push(b); }); return out; };
+    // merge: exp[i-1] + exp[i] heard as one word
+    const eMerge = exp.map((t, i) => i === 0 ? null :
+      pairTargets(exp[i - 1].w, t.w, exp[i - 1].k, t.k, acc.merge.size ? accFor(acc.merge, exp[i - 1].k + ' ' + t.k) : null));
+    // split: rec[j-1] + rec[j] heard for one passage word
+    const rPair = rec.map((t, j) => j === 0 ? null : pairTargets(rec[j - 1].w, t.w, rec[j - 1].k, t.k, null));
+    const rPairKey = rec.map((t, j) => j === 0 ? null : rec[j - 1].k + ' ' + t.k);
+    const same = (i, j) => eId[i] === rId[j] || (eG[i] >= 0 && eG[i] === rG[j]) || (hasAcc && accSingle.has(eId[i] * 1e6 + rId[j]));
+    const mergeOk = (i, j) => inTargets(eMerge[i], rec[j].k);
+    const splitOk = (i, j) => inTargets(rPair[j], exp[i].k) || (acc.split.size > 0 && acc.split.has(exp[i].k + '|' + rPairKey[j]));
+
+    const cost = new Float64Array((n + 1) * W).fill(Infinity);
+    const back = new Uint8Array((n + 1) * W);
+    cost[0] = 0;
+    for (let i = 0; i <= n; i++) {
+      for (let j = 0; j <= m; j++) {
+        if (i === 0 && j === 0) continue;
+        let best = Infinity, b = 0, c;
+        if (i > 0 && j > 0) {
+          const diag = cost[(i - 1) * W + j - 1];
+          if (diag < best && same(i - 1, j - 1)) { best = diag; b = 1; }
+          if (i > 1) { c = cost[(i - 2) * W + j - 1]; if (c < best && mergeOk(i - 1, j - 1)) { best = c; b = 2; } }
+          if (j > 1) { c = cost[(i - 1) * W + j - 2]; if (c < best && splitOk(i - 1, j - 1)) { best = c; b = 3; } }
+          c = diag + 1; if (c < best) { best = c; b = 4; }
+        }
+        if (i > 0) { c = cost[(i - 1) * W + j] + 1; if (c < best) { best = c; b = 5; } }
+        if (j > 0) { c = cost[i * W + j - 1] + 1; if (c < best) { best = c; b = 6; } }
+        cost[i * W + j] = best; back[i * W + j] = b;
+      }
+    }
+    const status = new Array(n).fill('missed');
+    const heard = new Array(n).fill(null);
+    const extras = [];
+    let i = n, j = m;
+    while (i > 0 || j > 0) {
+      const b = back[i * W + j];
+      if (b === 1) { status[i - 1] = 'ok'; i--; j--; }
+      else if (b === 2) { status[i - 1] = status[i - 2] = 'ok'; i -= 2; j--; }
+      else if (b === 3) { status[i - 1] = 'ok'; i--; j -= 2; }
+      else if (b === 4) { status[i - 1] = 'wrong'; heard[i - 1] = rec[j - 1].w; i--; j--; }
+      else if (b === 5) { status[i - 1] = 'missed'; i--; }
+      else if (b === 6) { extras.unshift(rec[j - 1].w); j--; }
+      else break;
+    }
+    return { status, heard, extras };
+  }
+
+  /**
+   * score(passageText, transcript, acceptedList, {live})
+   * returns { score, correct, total, words:[{text, line, status, heard}], extras }
+   * status: ok | wrong | missed | skip (punctuation only) | pending (live mode, not read yet)
+   */
+  function score(passageText, transcript, acceptedList, opts = {}) {
+    const { words } = passageWords(passageText);
+    const exp = [];
+    words.forEach((w, wi) => w.tokens.forEach(t => exp.push(Object.assign(makeToken(t), { wi }))));
+    const rec = tokens(transcript).map(makeToken);
+    const acc = buildAccepted(acceptedList);
+    const al = align(exp, rec, acc);
+
+    const out = words.map(w => ({ text: w.text, line: w.line, status: w.tokens.length ? 'ok' : 'skip', heard: null }));
+    exp.forEach((t, ti) => {
+      const o = out[t.wi];
+      const s = al.status[ti];
+      if (s === 'wrong') { o.status = 'wrong'; o.heard = o.heard ? o.heard + ' ' + al.heard[ti] : al.heard[ti]; }
+      else if (s === 'missed' && o.status === 'ok') o.status = 'missed';
+    });
+    if (opts.live) {
+      let lastOk = -1;
+      out.forEach((o, i) => { if (o.status === 'ok') lastOk = i; });
+      for (let i = lastOk + 1; i < out.length; i++) if (out[i].status !== 'skip') out[i].status = 'pending';
+    }
+    const counted = out.filter(o => o.status !== 'skip');
+    const correct = counted.filter(o => o.status === 'ok').length;
+    const total = counted.length;
+    const pct = total ? Math.round((correct / total) * 1000) / 10 : 0;
+    return { score: pct, correct, total, words: out, extras: al.extras };
+  }
+
+  // Compact form saved with each attempt
+  function pack(result) {
+    return { v: 1, w: result.words.map(o => o.status === 'ok' ? 0 : o.status === 'missed' ? 1 : o.status === 'skip' ? null : (o.heard || '?')), x: result.extras };
+  }
+  function unpack(passageText, packed) {
+    const { words } = passageWords(passageText);
+    const arr = (packed && packed.w) || [];
+    return {
+      words: words.map((w, i) => {
+        const v = arr[i];
+        const status = !w.tokens.length ? 'skip' : v === 0 ? 'ok' : v === 1 ? 'missed' : (typeof v === 'string' ? 'wrong' : 'missed');
+        return { text: w.text, line: w.line, status, heard: typeof v === 'string' ? v : null };
+      }),
+      extras: (packed && packed.x) || []
+    };
+  }
+
+  function wordCount(text) { return passageWords(text).words.filter(w => w.tokens.length).length; }
+  function cleanWord(text) { return String(text).replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ''); }
+
+  return { score, tokens, passageWords, pack, unpack, wordCount, cleanWord, numberWords, canon };
+})();
+
+
+/* =====================================================================
+   Data layer
+   - SupabaseBackend: the real website (logins, database, file storage)
+   - DemoBackend: try-out mode when config.js has no Supabase keys.
+     Everything is kept in this browser only.
+   Both have the same functions, so the rest of the app doesn't care.
+   ===================================================================== */
+const CFG = Object.assign({
+  SUPABASE_URL: '', SUPABASE_KEY: '', SITE_NAME: 'My English Practice', TEACHER_NAME: '',
+  SPEECH_LANG: 'en-GB', STUDENT_EMAIL_DOMAIN: 'students.readaloud-practice.app'
+}, window.APP_CONFIG || {});
+const DEMO = !CFG.SUPABASE_URL || !CFG.SUPABASE_KEY;
+
+const USERNAME_RE = /^[a-z0-9._-]{2,24}$/;
+// Everyone logs in with a login name. Supabase needs an email, so we make a private one (no email is ever sent).
+function loginEmail(name) {
+  const n = String(name).trim().toLowerCase();
+  return n.includes('@') ? n : n + '@' + CFG.STUDENT_EMAIL_DOMAIN;
+}
+function newId() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+  });
+}
+function safeFileName(name) {
+  const dot = name.lastIndexOf('.');
+  const ext = dot > 0 ? name.slice(dot).toLowerCase().replace(/[^a-z0-9.]/g, '') : '';
+  const base = (dot > 0 ? name.slice(0, dot) : name).normalize('NFKD').replace(/[^A-Za-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50);
+  return (base || 'file') + ext;
+}
+function audioExt(mime) { return /mp4|aac|m4a/.test(mime) ? 'm4a' : /ogg/.test(mime) ? 'ogg' : 'webm'; }
+
+class AppError extends Error {
+  constructor(message, code) { super(message); this.code = code; }
+}
+function friendly(err, context) {
+  const msg = (err && (err.message || err.error_description || err.msg)) || String(err);
+  if (/invalid login credentials/i.test(msg)) {
+    return new AppError(context === 'student'
+      ? 'Wrong username or PIN. 用戶名稱或密碼不正確。'
+      : 'Wrong login name or password.', 'login');
+  }
+  if (/already registered|already exists/i.test(msg)) return new AppError('That username is already taken. Choose another one.', 'taken');
+  if (/password should be at least/i.test(msg)) return new AppError('The PIN or password is too short (at least 6 characters).', 'short');
+  if (/email address .* is invalid|email_address_invalid/i.test(msg)) {
+    return new AppError('Supabase refused the internal student address. Change STUDENT_EMAIL_DOMAIN in config.js to another made-up domain, e.g. "pupils.my-english-site.app".', 'email');
+  }
+  if (/failed to fetch|networkerror|load failed/i.test(msg)) return new AppError('No connection to the server. Check the internet and try again. 請檢查網絡。', 'network');
+  if (/exercise_text|schema cache/i.test(msg)) return new AppError('The database needs the new setup.sql. In Supabase, run setup.sql again (SQL Editor), then try again.', 'schema');
+  if (/rate limit/i.test(msg)) return new AppError('Too many tries in a short time. Wait a few minutes and try again.', 'rate');
+  return err instanceof Error ? err : new AppError(msg);
+}
+async function must(promise, context) {
+  const { data, error } = await promise;
+  if (error) throw friendly(error, context);
+  return data;
+}
+
+/* ------------------------------------------------------------------ */
+class SupabaseBackend {
+  constructor() {
+    this.demo = false;
+    this.sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY);
+  }
+  async currentProfile() {
+    const { data: { session } } = await this.sb.auth.getSession();
+    if (!session) return null;
+    const prof = await must(this.sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle());
+    return prof || { id: session.user.id, role: null, email: session.user.email };
+  }
+  async teacherExists() { return await must(this.sb.rpc('teacher_exists')); }
+  async signInStudent(username, pin) {
+    await must(this.sb.auth.signInWithPassword({ email: loginEmail(username), password: pin }), 'student');
+  }
+  async signInTeacher(login, password) {
+    await must(this.sb.auth.signInWithPassword({ email: loginEmail(login), password }), 'teacher');
+  }
+  async createTeacher(name, login, password) {
+    const data = await must(this.sb.auth.signUp({ email: loginEmail(login), password }));
+    if (!data.session) {
+      throw new AppError('Your account was made, but Supabase wants an email confirmation. In Supabase go to Authentication → Sign In / Providers → Email, turn OFF "Confirm email", delete this user under Authentication → Users, and create the teacher account again.');
+    }
+    try { await must(this.sb.rpc('claim_teacher', { p_name: name, p_username: String(login).trim().toLowerCase() })); }
+    catch (err) { await this.sb.auth.signOut(); throw err; }
+  }
+  async signOut() { await this.sb.auth.signOut(); }
+  async changePassword(newPassword) { await must(this.sb.auth.updateUser({ password: newPassword })); }
+
+  /* students */
+  async listStudents() {
+    return await must(this.sb.from('profiles').select('*').eq('role', 'student').order('display_name'));
+  }
+  async addStudent({ name, username, pin, passMark }) {
+    const tmp = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'student-signup' }
+    });
+    const data = await must(tmp.auth.signUp({ email: loginEmail(username), password: pin }));
+    if (!data.user || !data.session) {
+      throw new AppError('Supabase still has "Confirm email" turned on. Turn it off (Authentication → Sign In / Providers → Email), then add the student again.');
+    }
+    await must(this.sb.from('profiles').insert({
+      id: data.user.id, role: 'student', display_name: name, username: username.toLowerCase(), pass_mark: passMark
+    }));
+    try { await tmp.auth.signOut(); } catch (e) { /* not important */ }
+  }
+  async updateStudent(id, patch) { await must(this.sb.from('profiles').update(patch).eq('id', id)); }
+  async setStudentPin(id, pin) { await must(this.sb.rpc('set_student_pin', { p_student: id, p_pin: pin })); }
+
+  /* passages */
+  async listPassages() { return await must(this.sb.from('passages').select('*').order('created_at', { ascending: false })); }
+  async getPassage(id) { return await must(this.sb.from('passages').select('*').eq('id', id).maybeSingle()); }
+  async savePassage(p) {
+    const row = { title: p.title, body: p.body, glossary: p.glossary || '', updated_at: new Date().toISOString() };
+    if (p.id) { await must(this.sb.from('passages').update(row).eq('id', p.id)); return p.id; }
+    const d = await must(this.sb.from('passages').insert(row).select('id').single());
+    return d.id;
+  }
+  async deletePassage(id) { await must(this.sb.from('passages').delete().eq('id', id)); }
+
+  /* tasks */
+  async listTasks() { return await must(this.sb.from('tasks').select('*').order('created_at', { ascending: false })); }
+  async getTask(id) { return await must(this.sb.from('tasks').select('*').eq('id', id).maybeSingle()); }
+  async createTask(t) { await must(this.sb.from('tasks').insert(t)); }
+  async updateTask(id, patch) { await must(this.sb.from('tasks').update(patch).eq('id', id)); }
+  async deleteTask(id) {
+    const atts = await must(this.sb.from('attempts').select('audio_path').eq('task_id', id));
+    const subs = await must(this.sb.from('submissions').select('file_path').eq('task_id', id));
+    await must(this.sb.from('tasks').delete().eq('id', id));
+    const rec = atts.map(a => a.audio_path).filter(Boolean), files = subs.map(s => s.file_path).filter(Boolean);
+    if (rec.length) await this.sb.storage.from('recordings').remove(rec);
+    if (files.length) await this.sb.storage.from('submissions').remove(files);
+  }
+  async uploadMaterial(file) {
+    const path = newId() + '/' + safeFileName(file.name);
+    await must(this.sb.storage.from('materials').upload(path, file, { contentType: file.type || undefined }));
+    return path;
+  }
+
+  /* attempts */
+  async listAttempts({ taskId, full } = {}) {
+    const cols = full ? '*' : 'id, task_id, student_id, score, teacher_score, pass_mark, passed, duration_sec, audio_path, created_at';
+    let q = this.sb.from('attempts').select(cols).order('created_at', { ascending: true });
+    if (taskId) q = q.eq('task_id', taskId);
+    return await must(q);
+  }
+  async createAttempt(row, blob, mime) {
+    const id = newId();
+    let audio_path = null;
+    if (blob && blob.size) {
+      const path = `${row.student_id}/${row.task_id}/${id}.${audioExt(mime)}`;
+      const { error } = await this.sb.storage.from('recordings').upload(path, blob, { contentType: mime || 'audio/webm' });
+      if (!error) audio_path = path;
+    }
+    await must(this.sb.from('attempts').insert(Object.assign({ id, audio_path }, row)));
+    return { id, audio_path };
+  }
+  async updateAttempt(id, patch) { await must(this.sb.from('attempts').update(patch).eq('id', id)); }
+  async deleteAttempt(a) {
+    await must(this.sb.from('attempts').delete().eq('id', a.id));
+    if (a.audio_path) await this.sb.storage.from('recordings').remove([a.audio_path]);
+  }
+
+  /* submissions */
+  async listSubmissions({ taskId } = {}) {
+    let q = this.sb.from('submissions').select('*').order('created_at', { ascending: true });
+    if (taskId) q = q.eq('task_id', taskId);
+    return await must(q);
+  }
+  async createSubmission({ taskId, studentId, file }) {
+    const path = `${studentId}/${taskId}/${Date.now()}-${safeFileName(file.name)}`;
+    await must(this.sb.storage.from('submissions').upload(path, file, { contentType: file.type || undefined }));
+    await must(this.sb.from('submissions').insert({ task_id: taskId, student_id: studentId, file_path: path, file_name: file.name }));
+  }
+  async updateSubmission(id, patch) { await must(this.sb.from('submissions').update(patch).eq('id', id)); }
+  async deleteSubmission(s) {
+    await must(this.sb.from('submissions').delete().eq('id', s.id));
+    await this.sb.storage.from('submissions').remove([s.file_path]);
+  }
+
+  /* accepted words */
+  async listAccepted() { return await must(this.sb.from('accepted_words').select('*').order('created_at', { ascending: false })); }
+  async addAccepted(r) { await must(this.sb.from('accepted_words').insert(r)); }
+  async deleteAccepted(id) { await must(this.sb.from('accepted_words').delete().eq('id', id)); }
+
+  /* files */
+  async fileUrl(bucket, path, download) {
+    const d = await must(this.sb.storage.from(bucket).createSignedUrl(path, 3600, download ? { download: true } : undefined));
+    return d.signedUrl;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+const DEMO_KEY = 'readaloud-demo-v3';
+const DEMO_PASSAGE = `Last Saturday, my family and I went to an island. We took the train. Then we took a cable car up the hill. The view was amazing. We could see the sea, the airport and many small boats.
+
+At the top, we visited a big temple. There were more than two hundred steps! My legs were tired, but I was happy. For lunch, we ate noodles at a small shop. It was the best day of my month.`;
+const DEMO_QUESTIONS = `1. Where did the family go last Saturday?
+
+2. How did they get up the hill?
+
+3. How many steps were there?
+
+4. Find a word in paragraph 2 that means "needing a rest".
+
+5. Was the writer happy at the end of the day? Give one reason.`;
+const DEMO_GLOSSARY = `view = 景色 (what you can see)
+amazing = 很棒的 (very, very good)
+cable car = 纜車
+steps = 樓梯級
+tired = 疲倦的
+noodles = 麵`;
+
+class DemoBackend {
+  constructor() {
+    this.demo = true;
+    this.blobs = new Map();
+    try { this.db = JSON.parse(localStorage.getItem(DEMO_KEY) || 'null'); } catch (e) { this.db = null; }
+    if (!this.db || !this.db.profiles) this.reset(false);
+    try { this.uid = sessionStorage.getItem(DEMO_KEY + '-uid'); } catch (e) { this.uid = null; }
+  }
+  reset(save = true) {
+    const t = 'demo-teacher', j = 'demo-jackson', c = 'demo-chris', p1 = 'demo-passage-1';
+    const now = Date.now(), iso = ms => new Date(now - ms).toISOString();
+    this.db = {
+      profiles: [
+        { id: t, role: 'teacher', display_name: 'Teacher', username: 'teacher', pass_mark: 90, active: true, created_at: iso(9e6), pin: 'demo1234' },
+        { id: j, role: 'student', display_name: 'Jackson', username: 'jackson', pass_mark: 90, active: true, created_at: iso(9e6), pin: '111111' },
+        { id: c, role: 'student', display_name: 'Chris', username: 'chris', pass_mark: 90, active: true, created_at: iso(9e6), pin: '222222' }
+      ],
+      passages: [{ id: p1, title: 'A Saturday on the Island', body: DEMO_PASSAGE, glossary: DEMO_GLOSSARY, created_at: iso(8e6), updated_at: iso(8e6) }],
+      tasks: [
+        { id: 'demo-task-1', student_id: j, title: 'A Saturday on the Island', instructions: 'Listen first. Then read the whole passage out loud.', passage_id: p1, needs_upload: false, pass_mark: null, attachment_path: null, attachment_name: null, due_date: null, archived: false, created_at: iso(7e6) },
+        { id: 'demo-task-2', student_id: c, title: 'Article 15', instructions: 'Read the text out loud first. Then answer the questions on paper and upload a photo.', exercise_text: DEMO_QUESTIONS, passage_id: p1, needs_upload: true, pass_mark: 85, attachment_path: null, attachment_name: null, due_date: null, archived: false, created_at: iso(7e6) }
+      ],
+      attempts: [
+        this._fakeAttempt('demo-a1', 'demo-task-1', j, 'last saturday my family and i went to an island we took the train then we took a cable car up the hill the view is amazing we could see the sea and many small boat at the top we visit a big temple there were more than 200 steps my legs were tired but i was happy', iso(5e6), 90),
+        this._fakeAttempt('demo-a2', 'demo-task-1', j, 'last saturday my family and i went to an island we took the train then we took a cable car up the hill the few was amazing we could see the sea the airport and many small boats at the top we visited a big temple there were more than two hundred steps my leg were tired but i was happy for lunch we ate noodles at a small shop it was the best day of my month', iso(3e6), 90)
+      ],
+      submissions: [],
+      accepted_words: []
+    };
+    if (save) this._save();
+  }
+  _fakeAttempt(id, task_id, student_id, transcript, created_at, pm) {
+    const r = Scoring.score(DEMO_PASSAGE, transcript, []);
+    return { id, task_id, student_id, passage_text: DEMO_PASSAGE, transcript, score: r.score, pass_mark: pm, passed: r.score >= pm, word_results: Scoring.pack(r), audio_path: null, duration_sec: 48, device: 'demo', teacher_score: null, teacher_note: null, created_at };
+  }
+  _save() { try { localStorage.setItem(DEMO_KEY, JSON.stringify(this.db)); } catch (e) { /* storage full or blocked */ } }
+  _setUid(uid) { this.uid = uid; try { uid ? sessionStorage.setItem(DEMO_KEY + '-uid', uid) : sessionStorage.removeItem(DEMO_KEY + '-uid'); } catch (e) { } }
+  _me() { return this.db.profiles.find(p => p.id === this.uid) || null; }
+  _isTeacher() { const m = this._me(); return m && m.role === 'teacher'; }
+  _clean(p) { if (!p) return p; const { pin, ...rest } = p; return rest; }
+  async _tick() { await new Promise(r => setTimeout(r, 120)); }
+
+  async currentProfile() { return this._clean(this._me()); }
+  async teacherExists() { return true; }
+  async signInStudent(username, pin) {
+    await this._tick();
+    const p = this.db.profiles.find(x => x.username === String(username).trim().toLowerCase() && x.pin === pin);
+    if (!p) throw new AppError('Wrong username or PIN. 用戶名稱或密碼不正確。', 'login');
+    this._setUid(p.id);
+  }
+  async signInAs(id) { this._setUid(id); }
+  async signInTeacher(login, password) {
+    await this._tick();
+    const p = this.db.profiles.find(x => x.role === 'teacher' && x.username === String(login).trim().toLowerCase() && x.pin === password);
+    if (!p) throw new AppError('Wrong login name or password.', 'login');
+    this._setUid(p.id);
+  }
+  async createTeacher() { throw new AppError('The demo already has a teacher account.'); }
+  async signOut() { this._setUid(null); }
+  async changePassword(newPassword) { this._me().pin = newPassword; this._save(); }
+
+  _mine(list) { return this._copy(this._isTeacher() ? list : list.filter(x => x.student_id === this.uid)); }
+  _copy(x) { return JSON.parse(JSON.stringify(x)); }
+
+  async listStudents() { return this.db.profiles.filter(p => p.role === 'student').map(p => this._clean(p)).sort((a, b) => a.display_name.localeCompare(b.display_name)); }
+  async addStudent({ name, username, pin, passMark }) {
+    await this._tick();
+    if (this.db.profiles.some(p => p.username === username)) throw new AppError('That username is already taken. Choose another one.');
+    this.db.profiles.push({ id: newId(), role: 'student', display_name: name, username, pass_mark: passMark, active: true, created_at: new Date().toISOString(), pin });
+    this._save();
+  }
+  async updateStudent(id, patch) { Object.assign(this.db.profiles.find(p => p.id === id), patch); this._save(); }
+  async setStudentPin(id, pin) { this.db.profiles.find(p => p.id === id).pin = pin; this._save(); }
+
+  async listPassages() {
+    if (this._isTeacher()) return this._copy(this.db.passages).reverse();
+    const ids = new Set(this._mine(this.db.tasks).map(t => t.passage_id));
+    return this._copy(this.db.passages.filter(p => ids.has(p.id)));
+  }
+  async getPassage(id) { return (await this.listPassages()).find(p => p.id === id) || null; }
+  async savePassage(p) {
+    const now = new Date().toISOString();
+    if (p.id) { Object.assign(this.db.passages.find(x => x.id === p.id), { title: p.title, body: p.body, glossary: p.glossary, updated_at: now }); this._save(); return p.id; }
+    const id = newId();
+    this.db.passages.push({ id, title: p.title, body: p.body, glossary: p.glossary || '', created_at: now, updated_at: now });
+    this._save(); return id;
+  }
+  async deletePassage(id) {
+    this.db.passages = this.db.passages.filter(p => p.id !== id);
+    this.db.tasks.forEach(t => { if (t.passage_id === id) t.passage_id = null; });
+    this._save();
+  }
+
+  async listTasks() { return this._mine(this.db.tasks).slice().sort((a, b) => b.created_at.localeCompare(a.created_at)); }
+  async getTask(id) { return this._mine(this.db.tasks).find(t => t.id === id) || null; }
+  async createTask(t) { this.db.tasks.push(Object.assign({ id: newId(), created_at: new Date().toISOString(), archived: false }, t)); this._save(); }
+  async updateTask(id, patch) { Object.assign(this.db.tasks.find(t => t.id === id), patch); this._save(); }
+  async deleteTask(id) {
+    this.db.tasks = this.db.tasks.filter(t => t.id !== id);
+    this.db.attempts = this.db.attempts.filter(a => a.task_id !== id);
+    this.db.submissions = this.db.submissions.filter(s => s.task_id !== id);
+    this._save();
+  }
+  async uploadMaterial(file) { const path = 'materials/' + newId() + '/' + safeFileName(file.name); this.blobs.set(path, file); return path; }
+
+  async listAttempts({ taskId } = {}) {
+    let l = this._mine(this.db.attempts);
+    if (taskId) l = l.filter(a => a.task_id === taskId);
+    return l.slice().sort((a, b) => a.created_at.localeCompare(b.created_at));
+  }
+  async createAttempt(row, blob, mime) {
+    await this._tick();
+    const id = newId();
+    let audio_path = null;
+    if (blob && blob.size) { audio_path = `recordings/${id}.${audioExt(mime)}`; this.blobs.set(audio_path, blob); }
+    this.db.attempts.push(Object.assign({ id, audio_path, teacher_score: null, teacher_note: null, created_at: new Date().toISOString() }, row));
+    this._save();
+    return { id, audio_path };
+  }
+  async updateAttempt(id, patch) { Object.assign(this.db.attempts.find(a => a.id === id), patch); this._save(); }
+  async deleteAttempt(a) { this.db.attempts = this.db.attempts.filter(x => x.id !== a.id); this._save(); }
+
+  async listSubmissions({ taskId } = {}) {
+    let l = this._mine(this.db.submissions);
+    if (taskId) l = l.filter(s => s.task_id === taskId);
+    return l.slice().sort((a, b) => a.created_at.localeCompare(b.created_at));
+  }
+  async createSubmission({ taskId, studentId, file }) {
+    await this._tick();
+    const path = `submissions/${newId()}/${safeFileName(file.name)}`;
+    this.blobs.set(path, file);
+    this.db.submissions.push({ id: newId(), task_id: taskId, student_id: studentId, file_path: path, file_name: file.name, feedback: null, feedback_at: null, created_at: new Date().toISOString() });
+    this._save();
+  }
+  async updateSubmission(id, patch) { Object.assign(this.db.submissions.find(s => s.id === id), patch); this._save(); }
+  async deleteSubmission(s) { this.db.submissions = this.db.submissions.filter(x => x.id !== s.id); this._save(); }
+
+  async listAccepted() {
+    const l = this._copy(this.db.accepted_words);
+    return this._isTeacher() ? l.reverse() : l.filter(r => !r.student_id || r.student_id === this.uid);
+  }
+  async addAccepted(r) { this.db.accepted_words.push(Object.assign({ id: newId(), created_at: new Date().toISOString() }, r)); this._save(); }
+  async deleteAccepted(id) { this.db.accepted_words = this.db.accepted_words.filter(r => r.id !== id); this._save(); }
+
+  async fileUrl(bucket, path) {
+    const b = this.blobs.get(path);
+    if (!b) throw new AppError('In demo mode, files are only kept until you reload the page.');
+    return URL.createObjectURL(b);
+  }
+}
+
+/* =====================================================================
+   Speech: recording + speech recognition (listening) and
+   text-to-speech (the "Listen" button and tapping a word).
+   ===================================================================== */
+const Speech = (() => {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  const canRecordAudio = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+
+  function deviceName() {
+    const os = isIOS ? 'iPhone/iPad' : isAndroid ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Mac/.test(ua) ? 'Mac' : /CrOS/.test(ua) ? 'Chromebook' : /Linux/.test(ua) ? 'Linux' : 'Other';
+    const br = /Edg\//.test(ua) ? 'Edge' : /CriOS|Chrome\//.test(ua) ? 'Chrome' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Safari/.test(ua) ? 'Safari' : 'Browser';
+    return os + ' ' + br;
+  }
+  function pickMime() {
+    if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return '';
+    for (const t of ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus']) {
+      if (MediaRecorder.isTypeSupported(t)) return t;
+    }
+    return '';
+  }
+
+  const MESSAGES = {
+    unsupported: isIOS
+      ? 'Please open this page in Safari to read aloud. 請用 Safari 開啟這個網頁。'
+      : 'This browser cannot listen to you. Please open this page in Google Chrome. 請用 Google Chrome 開啟這個網頁。',
+    'mic-denied': 'The microphone is blocked. Allow the microphone for this website, then try again. 請允許這個網站使用咪高峰，然後再試。',
+    'not-allowed': 'The microphone is blocked. Allow the microphone for this website, then try again. 請允許這個網站使用咪高峰，然後再試。',
+    'service-not-allowed': isIOS
+      ? 'Turn on Dictation: Settings → General → Keyboard → Enable Dictation. Then try again. 請在「設定 → 一般 → 鍵盤」開啟「聽寫」。'
+      : 'Speech checking is turned off in this browser. Please use Google Chrome. 請用 Google Chrome。',
+    network: 'Speech checking needs the internet. Check the Wi-Fi and try again. 請檢查網絡，然後再試。',
+    'audio-capture': 'No microphone was found. Check that the microphone is connected. 找不到咪高峰。',
+    'language-not-supported': 'This browser cannot listen in English. Please use Google Chrome. 請用 Google Chrome。',
+    stuck: 'The listening stopped working. Reload the page and try again. 請重新載入網頁再試。'
+  };
+
+  class Session {
+    constructor({ lang, onText, onFatal }) {
+      this.lang = lang || 'en-GB';
+      this.onText = onText || (() => {});
+      this.onFatal = onFatal || (() => {});
+    }
+
+    async start() {
+      if (!SR) throw new AppError(MESSAGES.unsupported, 'unsupported');
+      this.active = true; this.committed = []; this.sessionFinal = ''; this.interim = '';
+      this.startedAt = Date.now(); this.audioOk = false; this.audioDropped = false;
+      this.restarts = []; this.fatal = null; this.chunks = [];
+      if (canRecordAudio) {
+        try {
+          this.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+          this.mime = pickMime();
+          this.mr = new MediaRecorder(this.stream, this.mime ? { mimeType: this.mime, audioBitsPerSecond: 32000 } : undefined);
+          this.mime = this.mr.mimeType || this.mime || 'audio/webm';
+          this.mr.ondataavailable = e => { if (e.data && e.data.size) this.chunks.push(e.data); };
+          this.mr.start(1000);
+          this.audioOk = true;
+        } catch (e) {
+          this._releaseAudio();
+          if (e && (e.name === 'NotAllowedError' || e.name === 'SecurityError')) throw new AppError(MESSAGES['mic-denied'], 'mic-denied');
+          // otherwise go on without keeping a recording
+        }
+      }
+      this._startRecognition();
+    }
+
+    _startRecognition() {
+      const r = new SR();
+      r.lang = this.lang; r.continuous = true; r.interimResults = true; r.maxAlternatives = 1;
+      r.onresult = e => {
+        const finals = []; let interim = '';
+        for (let i = 0; i < e.results.length; i++) {
+          const res = e.results[i], t = (res[0] && res[0].transcript || '').trim();
+          if (!t) continue;
+          if (res.isFinal) {
+            // some Android phones repeat earlier text inside later results
+            const prev = finals[finals.length - 1], low = t.toLowerCase();
+            if (prev && low.startsWith(prev.toLowerCase())) finals[finals.length - 1] = t;
+            else if (!(prev && prev.toLowerCase().startsWith(low))) finals.push(t);
+          } else interim += ' ' + t;
+        }
+        this.sessionFinal = finals.join(' ');
+        this.interim = interim.trim();
+        this.onText(this.text());
+      };
+      r.onerror = e => {
+        const code = e.error;
+        if (code === 'no-speech' || code === 'aborted') return;
+        if (code === 'audio-capture' && this.audioOk) { this._dropAudio(); return; }
+        if (MESSAGES[code]) this._fail(code);
+      };
+      r.onend = () => {
+        this.recRunning = false;
+        const piece = [this.sessionFinal, this.interim].filter(Boolean).join(' ');
+        if (piece) this.committed.push(piece);
+        this.sessionFinal = ''; this.interim = '';
+        if (this.active) {
+          const now = Date.now();
+          this.restarts = this.restarts.filter(t => now - t < 4000);
+          this.restarts.push(now);
+          if (this.restarts.length > 12) { this._fail('stuck'); return; }
+          setTimeout(() => { if (this.active) this._startRecognition(); }, 120);
+        } else if (this._endResolve) this._endResolve();
+      };
+      this.rec = r;
+      this.recRunning = true;
+      try { r.start(); } catch (e) { setTimeout(() => { try { r.start(); } catch (e2) { this._fail('stuck'); } }, 300); }
+    }
+
+    _dropAudio() {
+      // The phone cannot share the microphone: keep listening, stop keeping the sound file
+      this.audioDropped = true; this.audioOk = false;
+      try { if (this.mr && this.mr.state !== 'inactive') this.mr.stop(); } catch (e) { }
+      this._releaseAudio(); this.chunks = [];
+    }
+    _releaseAudio() {
+      if (this.stream) this.stream.getTracks().forEach(t => t.stop());
+      this.stream = null;
+    }
+    _fail(code) {
+      if (this.fatal) return;
+      this.fatal = code; this.active = false;
+      try { this.rec && this.rec.abort(); } catch (e) { }
+      try { if (this.mr && this.mr.state !== 'inactive') this.mr.stop(); } catch (e) { }
+      this._releaseAudio();
+      this.onFatal(new AppError(MESSAGES[code] || MESSAGES.stuck, code));
+    }
+
+    text() {
+      return [...this.committed, this.sessionFinal, this.interim].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    }
+    seconds() { return Math.round((Date.now() - this.startedAt) / 1000); }
+
+    async stop() {
+      const duration = this.seconds();
+      this.active = false;
+      await new Promise(resolve => {
+        if (!this.rec || !this.recRunning || this.fatal) { resolve(); return; }
+        this._endResolve = resolve;
+        try { this.rec.stop(); } catch (e) { resolve(); }
+        setTimeout(() => { try { this.rec && this.rec.abort(); } catch (e) { } resolve(); }, 2500);
+      });
+      let blob = null;
+      if (this.mr && this.audioOk && this.mr.state !== 'inactive') {
+        blob = await new Promise(resolve => {
+          this.mr.onstop = () => resolve(new Blob(this.chunks, { type: this.mime }));
+          try { this.mr.stop(); } catch (e) { resolve(null); }
+          setTimeout(() => resolve(this.chunks.length ? new Blob(this.chunks, { type: this.mime }) : null), 2000);
+        });
+      }
+      this._releaseAudio();
+      return { transcript: this.text(), blob, mime: this.mime, duration, audioDropped: this.audioDropped };
+    }
+
+    cancel() {
+      this.active = false;
+      try { this.rec && this.rec.abort(); } catch (e) { }
+      try { if (this.mr && this.mr.state !== 'inactive') this.mr.stop(); } catch (e) { }
+      this._releaseAudio();
+    }
+  }
+
+  /* ----- text to speech ----- */
+  const tts = window.speechSynthesis;
+  let voices = [];
+  function loadVoices() { try { voices = tts ? tts.getVoices() : []; } catch (e) { voices = []; } }
+  if (tts) { loadVoices(); try { tts.addEventListener('voiceschanged', loadVoices); } catch (e) { tts.onvoiceschanged = loadVoices; } }
+  function pickVoice(lang) {
+    if (!voices.length) loadVoices();
+    const want = (lang || 'en-GB').toLowerCase();
+    const en = voices.filter(v => /^en/i.test(v.lang));
+    const score = v => (v.lang.toLowerCase().replace('_', '-') === want ? 4 : 0) + (/google|natural|enhanced|premium|siri/i.test(v.name) ? 2 : 0) + (v.localService ? 1 : 0);
+    return en.sort((a, b) => score(b) - score(a))[0] || null;
+  }
+  let speakToken = 0;
+  function speakQueue(parts, { rate = 0.9, lang, onPart, onDone } = {}) {
+    if (!tts) { onDone && onDone(); return; }
+    tts.cancel();
+    const token = ++speakToken;
+    const voice = pickVoice(lang);
+    let i = 0;
+    const next = () => {
+      if (token !== speakToken) return;
+      if (i >= parts.length) { onDone && onDone(); return; }
+      const idx = i++;
+      const u = new SpeechSynthesisUtterance(parts[idx]);
+      if (voice) u.voice = voice;
+      u.lang = voice ? voice.lang : (lang || 'en-GB');
+      u.rate = rate;
+      u.onstart = () => { if (token === speakToken && onPart) onPart(idx); };
+      u.onend = next;
+      u.onerror = next;
+      tts.speak(u);
+    };
+    next();
+  }
+  function speak(text, opts) { speakQueue([text], opts); }
+  function stopSpeaking() { speakToken++; if (tts) tts.cancel(); }
+
+  return {
+    supported: !!SR, canSpeak: !!tts, canRecordAudio, isIOS, isAndroid, deviceName,
+    Session, speak, speakQueue, stopSpeaking, MESSAGES
+  };
+})();
+
+/* =====================================================================
+   App: helpers, router, login and the student pages
+   ===================================================================== */
+const db = DEMO ? new DemoBackend() : (window.supabase ? new SupabaseBackend() : null);
+const app = document.getElementById('app');
+const state = { me: null, rate: 0.9, rec: null, view: null };
+try { state.rate = Number(localStorage.getItem('readaloud-rate')) || 0.9; } catch (e) { }
+
+const ICON = {
+  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21.5"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.5" fill="currentColor"/></svg>',
+  speaker: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+  upload: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="m7 8 5-5 5 5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>',
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>'
+};
+
+/* ---------- small helpers ---------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+function fmtWhen(iso) {
+  if (!iso) return '';
+  const d = new Date(iso), now = new Date();
+  const time = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const y = new Date(now); y.setDate(now.getDate() - 1);
+  if (d.toDateString() === now.toDateString()) return 'Today ' + time;
+  if (d.toDateString() === y.toDateString()) return 'Yesterday ' + time;
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + time;
+}
+function fmtDate(ymd) {
+  if (!ymd) return '';
+  const d = new Date(ymd + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+}
+function fmtPct(n) { n = Number(n); return (Number.isInteger(n) ? n : n.toFixed(1)) + '%'; }
+function fmtDur(sec) { sec = Number(sec) || 0; const m = Math.floor(sec / 60), s = sec % 60; return m + ':' + String(s).padStart(2, '0'); }
+function effScore(a) { return a.teacher_score !== null && a.teacher_score !== undefined ? Number(a.teacher_score) : Number(a.score); }
+function passMarkFor(task, student) {
+  if (task && task.pass_mark !== null && task.pass_mark !== undefined && task.pass_mark !== '') return Number(task.pass_mark);
+  if (student && student.pass_mark !== null && student.pass_mark !== undefined) return Number(student.pass_mark);
+  return 90;
+}
+/** state of a task for one student: read = todo|again|pass|null, upload = todo|done|null */
+function taskState(task, attempts, subs, pm) {
+  const mine = attempts.filter(a => a.task_id === task.id);
+  const files = subs.filter(s => s.task_id === task.id);
+  const best = mine.length ? Math.max(...mine.map(effScore)) : null;
+  const read = task.passage_id ? (best !== null && best >= pm ? 'pass' : mine.length ? 'again' : 'todo') : (mine.length ? (best >= pm ? 'pass' : 'again') : null);
+  const upload = task.needs_upload ? (files.length ? 'done' : 'todo') : null;
+  const done = (read === null || read === 'pass') && (upload === null || upload === 'done');
+  const overall = done ? 'pass' : (read === 'again' ? 'again' : 'todo');
+  const last = [...mine.map(a => a.created_at), ...files.map(s => s.created_at)].sort().pop() || null;
+  return { read, upload, done, overall, best, tries: mine.length, files, attempts: mine, last };
+}
+function toast(msg, bad) {
+  $$('.toast').forEach(x => x.remove());
+  const t = document.createElement('div');
+  t.className = 'toast' + (bad ? ' bad' : '');
+  t.setAttribute('role', 'status');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), bad ? 6000 : 2600);
+}
+async function busy(btn, fn) {
+  if (btn && btn.disabled) return;
+  const html = btn ? btn.innerHTML : '';
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> ' + html; }
+  try { return await fn(); }
+  catch (err) { console.error(err); toast(err.message || String(err), true); }
+  finally { if (btn && btn.isConnected) { btn.disabled = false; btn.innerHTML = html; } }
+}
+function go(hash) { if (location.hash === hash) render(); else location.hash = hash; }
+function parseGlossary(text) {
+  const map = new Map();
+  String(text || '').split('\n').forEach(line => {
+    const m = line.match(/^\s*(.+?)\s*(?:=|:|\t| - )\s*(.+)$/);
+    if (m) map.set(m[1].toLowerCase().replace(/\s+/g, ' ').trim(), m[2].trim());
+  });
+  return map;
+}
+
+/* ---------- the passage on screen ---------- */
+/**
+ * words: [{text, line, status, heard}] (from Scoring) or null for plain
+ * opts: { glossary, showHeard, locked }
+ */
+function passageHTML(text, words, opts = {}) {
+  const base = Scoring.passageWords(text);
+  const list = words || base.words.map(w => ({ text: w.text, line: w.line, status: w.tokens.length ? '' : 'skip', heard: null }));
+  const gloss = opts.glossary instanceof Map ? opts.glossary : parseGlossary(opts.glossary);
+  const glossAt = new Array(list.length).fill(null);
+  if (gloss.size) {
+    for (let i = 0; i < list.length; i++) {
+      for (let L = 4; L >= 1; L--) {
+        if (i + L > list.length) continue;
+        const key = list.slice(i, i + L).map(w => Scoring.cleanWord(w.text).toLowerCase()).join(' ');
+        if (gloss.has(key)) { for (let k = i; k < i + L; k++) glossAt[k] = key; i += L - 1; break; }
+      }
+    }
+  }
+  const byLine = new Map();
+  list.forEach((w, i) => { if (!byLine.has(w.line)) byLine.set(w.line, []); byLine.get(w.line).push(i); });
+  let html = '', open = false;
+  for (let li = 0; li < base.lineCount; li++) {
+    const idx = byLine.get(li);
+    if (!idx) { if (open) { html += '</p>'; open = false; } continue; }
+    html += open ? '<br>' : '<p>';
+    open = true;
+    html += idx.map(i => {
+      const w = list[i];
+      const cls = ['w', w.status && w.status !== 'pending' ? w.status : '', glossAt[i] ? 'gloss' : ''].filter(Boolean).join(' ');
+      const heard = opts.showHeard && w.status === 'wrong' && w.heard ? `<span class="heard">${esc(w.heard)}</span>` : '';
+      return `<span class="${cls}" data-i="${i}"${glossAt[i] ? ` data-g="${esc(glossAt[i])}"` : ''}>${esc(w.text)}${heard}</span>`;
+    }).join(' ');
+  }
+  if (open) html += '</p>';
+  return `<div class="passage${opts.locked ? ' locked' : ''}" ${opts.id ? `id="${opts.id}"` : ''}>${html}</div>`;
+}
+function sentencesOf(text) {
+  const { words } = Scoring.passageWords(text);
+  const out = []; let cur = [];
+  words.forEach((w, i) => {
+    if (cur.length && words[cur[cur.length - 1]].line !== w.line) { out.push(cur); cur = []; }
+    cur.push(i);
+    if (/[.!?]["')\]]*$/.test(w.text)) { out.push(cur); cur = []; }
+  });
+  if (cur.length) out.push(cur);
+  return out.map(ix => ({ ix, text: ix.map(i => words[i].text).join(' ') }));
+}
+
+/* word sheet: tap a word to hear it */
+let sheetTimer = null;
+function showWordSheet(word, meaning, heard) {
+  closeWordSheet();
+  const el = document.createElement('div');
+  el.className = 'wordsheet'; el.id = 'wordsheet';
+  el.innerHTML = `<div style="flex:1">
+      <div class="ws-word">${esc(word)}</div>
+      ${meaning ? `<div class="ws-mean">${esc(meaning)}</div>` : ''}
+      ${heard ? `<div class="ws-heard">We heard: “${esc(heard)}” 我們聽到：“${esc(heard)}”</div>` : ''}
+    </div>
+    <button type="button" data-act="say" data-text="${esc(word)}">${ICON.speaker} Hear it</button>
+    <button type="button" class="ws-close" data-act="close-sheet" aria-label="Close">×</button>`;
+  document.body.appendChild(el);
+  el.addEventListener('click', onClick);
+  sheetTimer = setTimeout(closeWordSheet, 9000);
+}
+function closeWordSheet() { clearTimeout(sheetTimer); const el = $('#wordsheet'); if (el) el.remove(); }
+
+/* ---------- page frame ---------- */
+function demoBar() {
+  if (!DEMO) return '';
+  return `<div class="demo-bar">Demo mode: everything stays in this browser. <a href="#" data-act="demo-reset">Reset the demo</a></div>`;
+}
+function frame(inner, { tabs, wide } = {}) {
+  const me = state.me;
+  const tabHTML = tabs ? `<nav class="tabs" aria-label="Teacher pages">${[
+    ['progress', 'Progress'], ['tasks', 'Tasks'], ['passages', 'Passages'], ['students', 'Students'], ['words', 'Word rules']
+  ].map(([k, l]) => `<a href="#/t/${k}" class="${tabs === k ? 'on' : ''}">${l}</a>`).join('')}</nav>` : '';
+  return `${demoBar()}
+    <header class="topbar">
+      <a class="brand" href="#/" data-act="brand" title="Back to the login page">
+        <span class="brand-mark">Aa</span>${esc(CFG.SITE_NAME)}</a>
+      ${me ? `<span class="who">${esc(me.display_name || '')}</span><button class="btn small" data-act="logout">Log out <span class="zh">登出</span></button>` : ''}
+    </header>
+    ${tabHTML}
+    <main class="wrap${wide ? ' wide' : ''}">${inner}</main>`;
+}
+function loadingFrame() { app.innerHTML = frame('<div class="loading"><span class="spinner"></span> Loading… 載入中…</div>'); }
+
+/* ---------- router ---------- */
+function cleanupView() {
+  if (state.rec) { state.rec.cancel(); state.rec = null; }
+  clearInterval(state.timer); state.timer = null;
+  Speech.stopSpeaking();
+  closeWordSheet();
+  state.view = null;
+}
+async function render() {
+  cleanupView();
+  if (!db) {
+    app.innerHTML = frame(`<div class="sheet"><h2>The website could not start</h2><div class="error-box">The Supabase library did not load. Check the internet connection and reload the page. 請檢查網絡，然後重新載入。</div>
+      <button class="btn primary" data-act="reload">Reload</button></div>`);
+    return;
+  }
+  const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
+  try {
+    if (!state.me) state.me = await db.currentProfile();
+  } catch (err) { state.me = null; console.error(err); }
+  const me = state.me;
+  try {
+    if (!me) return parts[0] === 'teacher' ? await viewTeacherLogin() : viewLogin();
+    if (!me.role) return viewNoAccess();
+    if (me.role === 'student') {
+      if (me.active === false) return viewNoAccess(true);
+      if (parts[0] === 'task' && parts[1]) return await viewStudentTask(parts[1]);
+      return await viewStudentHome();
+    }
+    // teacher
+    if (parts[0] !== 't') return go('#/t/progress');
+    const page = parts[1] || 'progress';
+    if (page === 'progress') return await viewProgress();
+    if (page === 'tasks') return await viewTasks();
+    if (page === 'task' && parts[2]) return await viewTeacherTask(parts[2]);
+    if (page === 'passages') return await viewPassages();
+    if (page === 'passage') return await viewPassageEdit(parts[2]);
+    if (page === 'students') return await viewStudents();
+    if (page === 'words') return await viewWordRules();
+    return go('#/t/progress');
+  } catch (err) {
+    console.error(err);
+    app.innerHTML = frame(`<div class="sheet"><h2>Something went wrong</h2><div class="error-box">${esc(err.message || err)}</div>
+      <button class="btn primary" data-act="reload">Try again</button></div>`);
+  }
+}
+
+/* ---------- login ---------- */
+function viewLogin(error) {
+  app.innerHTML = `${demoBar()}<div class="login">
+    <h1>${esc(CFG.SITE_NAME)}</h1>
+    <p class="muted">Log in to see your tasks. 登入看你的功課。</p>
+    <form class="sheet" data-form="student-login" autocomplete="on">
+      ${error ? `<div class="error-box">${esc(error)}</div>` : ''}
+      <label class="field"><span>Username <span class="zh">用戶名稱</span></span>
+        <input name="username" autocapitalize="none" autocomplete="username" spellcheck="false" required></label>
+      <label class="field"><span>PIN <span class="zh">密碼</span></span>
+        <input name="pin" type="password" inputmode="numeric" autocomplete="current-password" class="pin" required></label>
+      <button class="btn primary big" style="width:100%">Log in <span class="zh" style="color:#fff">登入</span></button>
+    </form>
+    ${DEMO ? `<div class="sheet"><h3>Try the demo</h3><p class="small muted">Jackson's PIN is 111111 and Chris's is 222222, or tap a button.</p>
+      <div class="demo-logins">
+        <button class="btn" data-act="demo-as" data-id="demo-jackson">Log in as Jackson (student)</button>
+        <button class="btn" data-act="demo-as" data-id="demo-chris">Log in as Chris (student)</button>
+      </div></div>` : ''}
+    <p class="small"><a href="#/teacher">Teacher login</a></p>
+  </div>`;
+  const u = $('input[name=username]');
+  if (u) u.focus();
+}
+async function viewTeacherLogin(error) {
+  let exists = true;
+  try { exists = await db.teacherExists(); } catch (err) { error = error || err.message; }
+  app.innerHTML = `${demoBar()}<div class="login">
+    <h1>Teacher</h1>
+    ${exists ? `
+      <form class="sheet" data-form="teacher-login">
+        ${error ? `<div class="error-box">${esc(error)}</div>` : ''}
+        <label class="field"><span>Login name</span><input name="login" autocapitalize="none" spellcheck="false" autocomplete="username" required></label>
+        <label class="field"><span>Password</span><input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="btn primary big" style="width:100%">Log in</button>
+      </form>` : `
+      <form class="sheet" data-form="teacher-create">
+        <h2>Create the teacher account</h2>
+        <p class="small muted">This is only shown once. The first account made here becomes the teacher, and nobody can make another one.</p>
+        ${error ? `<div class="error-box">${esc(error)}</div>` : ''}
+        <label class="field"><span>Your name (shown on your pages)</span><input name="name" required placeholder="Mr Chan"></label>
+        <label class="field"><span>Login name</span><input name="login" required autocapitalize="none" spellcheck="false" autocomplete="username" placeholder="e.g. john">
+          <span class="hint">Small letters and numbers only. Not the same as a student's username.</span></label>
+        <label class="field"><span>Password (at least 8 characters)</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+        <label class="field"><span>Type the password again</span><input name="password2" type="password" minlength="8" autocomplete="new-password" required></label>
+        <button class="btn primary big" style="width:100%">Create teacher account</button>
+      </form>`}
+    <p class="small"><a href="#/">Student login</a></p>
+  </div>`;
+}
+function viewNoAccess(paused) {
+  app.innerHTML = frame(`<div class="sheet"><h2>${paused ? 'Your account is paused' : 'This account has no pages yet'}</h2>
+    <p>${paused ? 'Ask your teacher to turn it back on. 請問老師。' : 'Ask the teacher to add you as a student.'}</p>
+    <button class="btn" data-act="logout">Log out</button></div>`);
+}
+
+/* ---------- student: task list ---------- */
+const CHIP = {
+  todo: '<span class="chip todo">To do <span class="zh">未做</span></span>',
+  again: '<span class="chip again">Try again <span class="zh">再試</span></span>',
+  pass: '<span class="chip pass">Done <span class="zh">完成</span> ✓</span>'
+};
+async function viewStudentHome() {
+  loadingFrame();
+  const [tasks, attempts, subs] = await Promise.all([db.listTasks(), db.listAttempts(), db.listSubmissions()]);
+  const me = state.me;
+  const rows = tasks.filter(t => !t.archived).map(t => ({ t, s: taskState(t, attempts, subs, passMarkFor(t, me)) }));
+  const open = rows.filter(r => !r.s.done), done = rows.filter(r => r.s.done);
+  const item = ({ t, s }) => {
+    const meta = [];
+    if (t.passage_id) meta.push(`Read aloud <span class="zh">朗讀</span>${s.best !== null ? ` (best ${fmtPct(s.best)})` : ''}`);
+    if (t.exercise_text) meta.push('Questions <span class="zh">問題</span>');
+    if (t.needs_upload) meta.push(`Upload <span class="zh">上載</span>${s.upload === 'done' ? ' ✓' : ''}`);
+    if (t.due_date) meta.push(`Due <span class="zh">限期</span> ${esc(fmtDate(t.due_date))}`);
+    return `<li><a href="#/task/${esc(t.id)}" class="s-${s.overall}"><span class="stripe"></span>
+      <span><span class="t-title">${esc(t.title)}</span><span class="t-meta">${meta.map(m => `<span>${m}</span>`).join('')}</span></span>
+      ${CHIP[s.overall]}</a></li>`;
+  };
+  app.innerHTML = frame(`
+    <div class="greeting section"><h1>Hi, ${esc(me.display_name)}</h1>
+      <p class="muted">${open.length ? `You have ${open.length} task${open.length > 1 ? 's' : ''} to do. 你有 ${open.length} 份功課要做。` : 'All done. Well done! 全部完成，做得好！'}</p></div>
+    ${open.length ? `<ul class="tasklist section">${open.map(item).join('')}</ul>` : ''}
+    ${!rows.length ? '<div class="sheet"><p>No tasks yet. Your teacher will add some soon. 暫時沒有功課。</p></div>' : ''}
+    ${done.length ? `<h2>Finished <span class="zh">已完成</span></h2><ul class="tasklist">${done.map(item).join('')}</ul>` : ''}
+  `);
+}
+
+/* ---------- student: one task ---------- */
+async function viewStudentTask(id) {
+  loadingFrame();
+  const task = await db.getTask(id);
+  if (!task) { app.innerHTML = frame('<div class="sheet"><p>This task is not here any more. 找不到這份功課。</p><a class="btn" href="#/">My tasks</a></div>'); return; }
+  const [passage, attempts, subs, accepted] = await Promise.all([
+    task.passage_id ? db.getPassage(task.passage_id) : null,
+    db.listAttempts({ taskId: id }), db.listSubmissions({ taskId: id }), db.listAccepted()
+  ]);
+  const me = state.me, pm = passMarkFor(task, me);
+  const v = state.view = { task, passage, attempts, subs, accepted, pm, gloss: parseGlossary(passage && passage.glossary), result: null };
+  const parts = [passage ? 'read' : null, task.exercise_text ? 'questions' : null, task.needs_upload ? 'upload' : null].filter(Boolean);
+  const step = name => parts.length > 1 ? `Step ${parts.indexOf(name) + 1}: ` : '';
+
+  app.innerHTML = frame(`
+    <a class="back" href="#/">← My tasks <span class="zh">我的功課</span></a>
+    <h1>${esc(task.title)}</h1>
+    ${task.instructions ? `<p style="white-space:pre-wrap">${esc(task.instructions)}</p>` : ''}
+    ${task.due_date ? `<p class="muted">Due 限期: ${esc(fmtDate(task.due_date))}</p>` : ''}
+    ${task.attachment_path ? `<p><button class="btn" data-act="open-material">${ICON.download} Download the exercise <span class="zh">下載練習</span></button></p>` : ''}
+    ${passage ? `<section class="sheet" id="read">
+      <h2>${step('read')}Read aloud <span class="zh">朗讀</span></h2>
+      <p>Read the passage out loud. You need <b>${pm}%</b> to pass. <span class="zh">大聲讀出文章，要讀對 ${pm}% 才合格。</span></p>
+      <p id="best-line" class="muted"></p>
+      <div class="readbar">
+        <button class="btn" data-act="listen" id="listen-btn">${ICON.speaker} Listen first <span class="zh">先聽一次</span></button>
+        <span class="seg" role="group" aria-label="Speed">
+          <button type="button" data-act="rate" data-rate="0.7" class="${state.rate < 0.8 ? 'on' : ''}">Slow 慢</button>
+          <button type="button" data-act="rate" data-rate="0.9" class="${state.rate >= 0.8 ? 'on' : ''}">Normal 正常</button>
+        </span>
+      </div>
+      <p class="hint">Tap a word to hear it. 按一下字詞可以聽讀音。${v.gloss.size ? ' Words with a dotted line have a meaning. 有虛線的字有解釋。' : ''}</p>
+      <h3 style="margin-top:1rem">${esc(passage.title)}</h3>
+      ${passageHTML(passage.body, null, { glossary: v.gloss, id: 'passage' })}
+      <div id="result-area"></div>
+      <div id="rec-area"></div>
+    </section>` : ''}
+    ${task.exercise_text ? `<section class="sheet" id="questions">
+      <h2>${step('questions')}Questions <span class="zh">問題</span></h2>
+      ${passage ? '<p class="muted">The text is above. 文章在上面。</p>' : ''}
+      <div class="exercise">${esc(task.exercise_text)}</div>
+    </section>` : ''}
+    ${task.needs_upload ? `<section class="sheet" id="upload">
+      <h2>${step('upload')}Upload your answers <span class="zh">上載答案</span></h2>
+      <p>Upload a PDF or a photo of your answers. <span class="zh">可以上載 PDF 或相片。</span></p>
+      <label class="btn primary big">${ICON.upload} Choose file <span class="zh" style="color:#fff">選擇檔案</span>
+        <input type="file" accept="application/pdf,image/*" class="hidden" data-change="upload-file"></label>
+      <div id="upload-state" class="save-state"></div>
+      <ul class="filelist" id="filelist"></ul>
+    </section>` : ''}
+  `);
+  if (passage) { renderBestLine(); renderRecorder('idle'); }
+  if (task.needs_upload) renderFileList();
+}
+
+function renderBestLine() {
+  const v = state.view, el = $('#best-line');
+  if (!v || !el) return;
+  if (!v.attempts.length) { el.textContent = 'You have not tried yet. 你還未讀過。'; return; }
+  const best = Math.max(...v.attempts.map(effScore));
+  el.innerHTML = `Best so far <span class="zh">最高分</span>: <b>${fmtPct(best)}</b> (${v.attempts.length} ${v.attempts.length > 1 ? 'tries' : 'try'})${best >= v.pm ? ' — passed 合格 ✓' : ''}`;
+}
+
+function renderRecorder(mode, extra) {
+  const area = $('#rec-area');
+  if (!area) return;
+  if (!Speech.supported) {
+    area.innerHTML = `<div class="warn-box" style="margin-top:1rem">${esc(Speech.MESSAGES.unsupported)}</div>`;
+    return;
+  }
+  if (mode === 'idle') {
+    const tried = state.view.result || state.view.attempts.length;
+    area.innerHTML = `<div class="recorder">
+      ${extra && extra.error ? `<div class="error-box">${esc(extra.error)}</div>` : ''}
+      <button class="recbtn" data-act="rec-start" aria-label="Start reading">${ICON.mic}</button>
+      <div class="reclabel">${tried ? 'Read again' : 'Start reading'} <span class="zh">${tried ? '再讀一次' : '開始朗讀'}</span></div>
+      <div class="small muted">Press the red button, then read the passage. Press it again when you finish. 按紅色按鈕開始，讀完再按一次。</div>
+    </div>`;
+  } else if (mode === 'starting') {
+    area.innerHTML = `<div class="recorder"><button class="recbtn on" disabled aria-label="Starting">${ICON.mic}</button>
+      <div class="reclabel">Getting ready… <span class="zh">準備中…</span></div>
+      <div class="small muted">If the browser asks, allow the microphone. 如果問你，請按「允許」使用咪高峰。</div></div>`;
+  } else if (mode === 'recording') {
+    area.innerHTML = `<div class="recorder">
+      <button class="recbtn on" data-act="rec-stop" aria-label="Stop">${ICON.stop}</button>
+      <div class="reclabel">Reading… press to stop <span class="zh">讀完按這裏停止</span></div>
+      <div class="rectime" id="rectime">0:00</div></div>`;
+  } else if (mode === 'checking') {
+    area.innerHTML = `<div class="recorder"><div class="reclabel"><span class="spinner"></span> Checking… <span class="zh">正在評分…</span></div></div>`;
+  }
+}
+
+function setPassageLocked(locked) {
+  const p = $('#passage'); if (p) p.classList.toggle('locked', locked);
+  $$('#read .readbar button').forEach(b => { b.disabled = locked; });
+}
+
+async function startReading() {
+  const v = state.view;
+  Speech.stopSpeaking(); closeWordSheet(); resetListenButton();
+  $('#result-area').innerHTML = '';
+  // clear old marks
+  $$('#passage .w').forEach(el => { el.classList.remove('ok', 'wrong', 'missed', 'unread', 'speaking'); el.dataset.heard = ''; });
+  renderRecorder('starting');
+  setPassageLocked(true);
+  let lastLive = 0, pending = null;
+  const live = text => {
+    const now = Date.now();
+    const run = () => {
+      lastLive = Date.now(); pending = null;
+      const r = Scoring.score(v.passage.body, text, v.accepted, { live: true });
+      const spans = $$('#passage .w');
+      let lastOk = null;
+      r.words.forEach((w, i) => { if (spans[i]) { const ok = w.status === 'ok'; spans[i].classList.toggle('ok', ok); if (ok) lastOk = spans[i]; } });
+      if (lastOk) {
+        const rect = lastOk.getBoundingClientRect();
+        if (rect.bottom > window.innerHeight - 140 || rect.top < 60) lastOk.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    };
+    clearTimeout(pending);
+    if (now - lastLive > 300) run(); else pending = setTimeout(run, 300);
+  };
+  const session = new Speech.Session({
+    lang: CFG.SPEECH_LANG,
+    onText: live,
+    onFatal: err => {
+      clearInterval(state.timer);
+      state.rec = null; setPassageLocked(false);
+      renderRecorder('idle', { error: err.message });
+    }
+  });
+  try {
+    await session.start();
+  } catch (err) {
+    setPassageLocked(false);
+    renderRecorder('idle', { error: err.message });
+    return;
+  }
+  if (session.fatal) return;
+  state.rec = session;
+  renderRecorder('recording');
+  state.timer = setInterval(() => {
+    const t = $('#rectime'); if (t && state.rec) t.textContent = fmtDur(state.rec.seconds());
+    if (state.rec && state.rec.seconds() > 15 * 60) stopReading();
+  }, 500);
+}
+
+async function stopReading() {
+  const v = state.view, session = state.rec;
+  if (!session) return;
+  state.rec = null;
+  clearInterval(state.timer);
+  renderRecorder('checking');
+  const out = await session.stop();
+  setPassageLocked(false);
+  if (!out.transcript) {
+    renderRecorder('idle', { error: "We didn't hear anything. Speak a bit louder and closer to the microphone, then try again. 聽不到你的聲音，請大聲一點，再試一次。" });
+    $$('#passage .w').forEach(el => el.classList.remove('ok'));
+    return;
+  }
+  const r = Scoring.score(v.passage.body, out.transcript, v.accepted);
+  const passed = r.score >= v.pm;
+  v.result = r;
+  // long stretches that were not heard at all = parts he did not read
+  const unread = new Set();
+  let run = [];
+  const flush = () => { if (run.length >= 5) run.forEach(i => unread.add(i)); run = []; };
+  r.words.forEach((w, i) => { if (w.status === 'skip') return; if (w.status === 'missed') run.push(i); else flush(); });
+  flush();
+  // show marks on the passage
+  const spans = $$('#passage .w');
+  r.words.forEach((w, i) => {
+    const el = spans[i]; if (!el) return;
+    el.classList.remove('ok', 'wrong', 'missed', 'unread');
+    if (unread.has(i)) el.classList.add('unread');
+    else if (w.status === 'ok' || w.status === 'wrong' || w.status === 'missed') el.classList.add(w.status);
+    el.dataset.heard = w.heard || '';
+  });
+  const practise = [];
+  const seen = new Set();
+  r.words.forEach((w, i) => {
+    if (!unread.has(i) && (w.status === 'wrong' || w.status === 'missed')) {
+      const c = Scoring.cleanWord(w.text); const k = c.toLowerCase();
+      if (c && !seen.has(k)) { seen.add(k); practise.push(c); }
+    }
+  });
+  $('#result-area').innerHTML = `<div class="result ${passed ? 'pass' : 'fail'}">
+    <div class="score-line"><span class="score-big">${fmtPct(r.score)}</span>
+      <span class="verdict">${passed ? 'Passed! <span class="zh">合格！</span>' : 'Not yet <span class="zh">未合格</span>'}</span></div>
+    <p>${passed ? `Well done! You read ${r.correct} of ${r.total} words correctly. 做得好！`
+      : `You read ${r.correct} of ${r.total} words correctly. You need ${v.pm}%. Practise the red words and try again. 練習紅色的字，然後再試一次。`}</p>
+    <div class="legend"><span><span class="w ok">yellow</span> = read correctly 讀對</span><span><span class="w wrong">red</span> = practise this word 要再練習</span>${unread.size ? '<span><span class="w unread">grey</span> = not read 沒有讀</span>' : ''}</div>
+    ${unread.size ? '<div class="warn-box">Some parts were not heard at all (grey). Read the whole passage next time. 灰色部分沒有聽到，下次要讀完整篇。</div>' : ''}
+    ${practise.length ? `<h3>Words to practise <span class="zh">要練習的字</span></h3>
+      <div class="practice-words">${practise.slice(0, 30).map(w => `<button type="button" data-act="say" data-text="${esc(w)}">${ICON.speaker.replace('<svg', '<svg style="width:1em;height:1em;vertical-align:-.1em"')} ${esc(w)}</button>`).join('')}</div>` : ''}
+    <div id="save-state" class="save-state">Saving… 儲存中…</div>
+  </div>`;
+  renderRecorder('idle');
+  $('#result-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const row = {
+    task_id: v.task.id, student_id: state.me.id, passage_text: v.passage.body, transcript: out.transcript,
+    score: r.score, pass_mark: v.pm, passed, word_results: Scoring.pack(r), duration_sec: out.duration,
+    device: Speech.deviceName() + (out.audioDropped ? ' (no sound file)' : '')
+  };
+  v.pendingSave = { row, blob: out.blob, mime: out.mime };
+  await saveAttempt();
+}
+
+async function saveAttempt() {
+  const v = state.view; if (!v || !v.pendingSave) return;
+  const el = $('#save-state');
+  if (el) { el.className = 'save-state'; el.textContent = 'Saving… 儲存中…'; }
+  try {
+    const { row, blob, mime } = v.pendingSave;
+    const res = await db.createAttempt(row, blob, mime);
+    v.attempts.push(Object.assign({ id: res.id, created_at: new Date().toISOString(), teacher_score: null }, row));
+    v.pendingSave = null;
+    if (el && el.isConnected) { el.className = 'save-state good'; el.textContent = 'Saved. Your teacher can see this try. 已儲存，老師可以看到。'; }
+    renderBestLine();
+  } catch (err) {
+    console.error(err);
+    if (el && el.isConnected) {
+      el.className = 'save-state bad';
+      el.innerHTML = `Not saved: ${esc(err.message)} 未能儲存。 <button class="btn small" data-act="save-again">Save again 再儲存</button>`;
+    }
+  }
+}
+
+function resetListenButton() {
+  const b = $('#listen-btn');
+  if (b) b.innerHTML = `${ICON.speaker} Listen first <span class="zh">先聽一次</span>`;
+  $$('#passage .w.speaking').forEach(el => el.classList.remove('speaking'));
+  if (state.view) state.view.speaking = false;
+}
+function toggleListen() {
+  const v = state.view; if (!v || !v.passage) return;
+  if (v.speaking) { Speech.stopSpeaking(); resetListenButton(); return; }
+  if (!Speech.canSpeak) { toast('This browser cannot read aloud.', true); return; }
+  const sents = sentencesOf(v.passage.body);
+  const spans = $$('#passage .w');
+  v.speaking = true;
+  $('#listen-btn').innerHTML = `${ICON.stop} Stop <span class="zh">停止</span>`;
+  Speech.speakQueue(sents.map(s => s.text), {
+    rate: state.rate, lang: CFG.SPEECH_LANG,
+    onPart: idx => {
+      $$('#passage .w.speaking').forEach(el => el.classList.remove('speaking'));
+      sents[idx].ix.forEach(i => spans[i] && spans[i].classList.add('speaking'));
+      const first = spans[sents[idx].ix[0]];
+      if (first) { const r = first.getBoundingClientRect(); if (r.bottom > innerHeight - 120 || r.top < 40) first.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+    },
+    onDone: resetListenButton
+  });
+}
+
+async function renderFileList() {
+  const v = state.view, ul = $('#filelist'); if (!ul) return;
+  ul.innerHTML = v.subs.slice().reverse().map(s => `<li>
+    <div class="row"><b>${esc(s.file_name)}</b><span class="spacer"></span>
+      <button class="btn small" data-act="open-sub" data-id="${esc(s.id)}">Open 打開</button></div>
+    <div class="small muted">Uploaded 已上載 ${esc(fmtWhen(s.created_at))}</div>
+    ${s.feedback ? `<div class="feedback"><b>Teacher's comments 老師的意見:</b>\n${esc(s.feedback)}</div>` : ''}
+  </li>`).join('');
+}
+
+/* ---------- actions (clicks) ---------- */
+const actions = {
+  reload: () => (db ? render() : location.reload()),
+  logout: async () => { cleanupView(); await db.signOut(); state.me = null; go('#/'); },
+  brand: async () => {
+    if (!state.me) { go('#/'); return; }
+    if (state.rec) return; // don't leave in the middle of reading
+    if (!confirm('Log out and go back to the login page?\n登出並返回登入頁面？')) return;
+    await actions.logout();
+  },
+  'demo-reset': async () => { if (confirm('Reset the demo? Everything you added will be removed.')) { db.reset(); await db.signOut(); state.me = null; go('#/'); } },
+  'demo-as': async el => { if (!/^demo-(jackson|chris)$/.test(el.dataset.id)) return; await db.signInAs(el.dataset.id); state.me = null; go('#/'); },
+  say: el => Speech.speak(el.dataset.text, { rate: Math.min(state.rate, 0.85), lang: CFG.SPEECH_LANG }),
+  'close-sheet': () => closeWordSheet(),
+  rate: el => {
+    state.rate = Number(el.dataset.rate);
+    try { localStorage.setItem('readaloud-rate', state.rate); } catch (e) { }
+    $$('.seg button').forEach(b => b.classList.toggle('on', b === el));
+    if (state.view && state.view.speaking) { Speech.stopSpeaking(); resetListenButton(); toggleListen(); }
+  },
+  listen: () => toggleListen(),
+  'rec-start': () => startReading(),
+  'rec-stop': () => stopReading(),
+  'save-again': () => saveAttempt(),
+  'open-material': async el => busy(el, async () => {
+    const t = state.view.task;
+    window.open(await db.fileUrl('materials', t.attachment_path), '_blank');
+  }),
+  'open-sub': async el => busy(el, async () => {
+    const s = (state.view.subs || []).find(x => x.id === el.dataset.id);
+    window.open(await db.fileUrl('submissions', s.file_path), '_blank');
+  })
+};
+const changes = {
+  'upload-file': async el => {
+    const file = el.files && el.files[0]; el.value = '';
+    if (!file) return;
+    const st = $('#upload-state');
+    if (file.size > 25 * 1024 * 1024) { st.className = 'save-state bad'; st.textContent = 'This file is too big (more than 25 MB). 檔案太大。'; return; }
+    st.className = 'save-state'; st.innerHTML = '<span class="spinner"></span> Uploading… 上載中…';
+    try {
+      await db.createSubmission({ taskId: state.view.task.id, studentId: state.me.id, file });
+      state.view.subs = await db.listSubmissions({ taskId: state.view.task.id });
+      st.className = 'save-state good'; st.textContent = 'Uploaded. Your teacher can see it. 已上載，老師可以看到。';
+      renderFileList();
+    } catch (err) {
+      st.className = 'save-state bad'; st.textContent = 'Upload failed: ' + err.message + ' 上載失敗，請再試。';
+    }
+  }
+};
+const forms = {
+  'student-login': async f => {
+    const fd = new FormData(f);
+    const btn = $('button', f);
+    await busy(btn, async () => {
+      const u = String(fd.get('username') || '').trim().toLowerCase(), pin = String(fd.get('pin') || '').trim();
+      try { await db.signInStudent(u, pin); }
+      catch (err) { viewLogin(err.message); return; }
+      state.me = null; go('#/');
+    });
+  },
+  'teacher-login': async f => {
+    const fd = new FormData(f);
+    await busy($('button', f), async () => {
+      try { await db.signInTeacher(String(fd.get('login') || ''), String(fd.get('password') || '')); }
+      catch (err) { viewTeacherLogin(err.message); return; }
+      state.me = null; go('#/t/progress');
+    });
+  },
+  'teacher-create': async f => {
+    const fd = new FormData(f);
+    await busy($('button', f), async () => {
+      const login = String(fd.get('login') || '').trim().toLowerCase(), pw = String(fd.get('password') || '');
+      if (!USERNAME_RE.test(login)) { viewTeacherLogin('The login name can only have small letters, numbers, dots, dashes and underscores.'); return; }
+      if (pw.length < 8) { viewTeacherLogin('The password needs at least 8 characters.'); return; }
+      if (pw !== String(fd.get('password2') || '')) { viewTeacherLogin('The two passwords are not the same.'); return; }
+      try { await db.createTeacher(String(fd.get('name')).trim(), login, pw); }
+      catch (err) { viewTeacherLogin(err.message); return; }
+      state.me = null; go('#/t/progress');
+    });
+  }
+};
+
+function onClick(e) {
+  const w = e.target.closest('.passage .w');
+  if (w && !e.target.closest('[data-act]') && state.view && !state.rec && !w.closest('.passage.locked')) {
+    if (typeof onTeacherWord === 'function' && w.closest('[data-attempt]')) return onTeacherWord(w);
+    const word = Scoring.cleanWord(w.textContent.replace(w.querySelector('.heard')?.textContent || '', ''));
+    if (!word) return;
+    const meaning = w.dataset.g && state.view.gloss ? state.view.gloss.get(w.dataset.g) : null;
+    const phrase = w.dataset.g || word;
+    Speech.speak(phrase, { rate: Math.min(state.rate, 0.85), lang: CFG.SPEECH_LANG });
+    showWordSheet(phrase, meaning, w.dataset.heard);
+    return;
+  }
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  const fn = actions[el.dataset.act];
+  if (fn) { e.preventDefault(); fn(el, e); }
+}
+app.addEventListener('click', onClick);
+app.addEventListener('change', e => { const fn = changes[e.target.dataset.change]; if (fn) fn(e.target, e); });
+app.addEventListener('input', e => { const fn = (typeof inputs !== 'undefined') && inputs[e.target.dataset.input]; if (fn) fn(e.target, e); });
+app.addEventListener('submit', e => { const fn = forms[e.target.dataset.form]; if (fn) { e.preventDefault(); fn(e.target, e); } });
+window.addEventListener('hashchange', render);
+
+/* =====================================================================
+   Teacher pages: Progress, Tasks, one task (attempts + uploads),
+   Passages, Students, Word rules
+   ===================================================================== */
+async function loadAll() {
+  const [students, passages, tasks, attempts, subs, accepted] = await Promise.all([
+    db.listStudents(), db.listPassages(), db.listTasks(), db.listAttempts(), db.listSubmissions(), db.listAccepted()
+  ]);
+  const byId = list => new Map(list.map(x => [x.id, x]));
+  return { students, passages, tasks, attempts, subs, accepted, S: byId(students), P: byId(passages), T: byId(tasks) };
+}
+function triesHTML(st, pm) {
+  if (!st.attempts.length) return '<span class="muted">No tries yet</span>';
+  const list = st.attempts.slice(-8);
+  return `<span class="tries">${st.attempts.length > 8 ? '<span>…</span>' : ''}${list.map(a => {
+    const s = effScore(a);
+    return `<span class="${s >= pm ? 'p' : ''}" title="${esc(fmtWhen(a.created_at))}">${Math.round(s)}</span>`;
+  }).join('')}</span>`;
+}
+function readCell(t, st, pm) {
+  if (!t.passage_id && !st.attempts.length) return '<span class="muted">—</span>';
+  const chip = st.read === 'pass' ? `<span class="chip pass">Passed ✓</span>` : st.read === 'again' ? `<span class="chip again">Not passed yet</span>` : `<span class="chip todo">Not started</span>`;
+  return `${chip}<div class="small" style="margin-top:.3rem">Best ${st.best !== null ? fmtPct(st.best) : '—'} / pass ${pm}%</div><div style="margin-top:.3rem">${triesHTML(st, pm)}</div>`;
+}
+function uploadCell(t, st) {
+  if (!t.needs_upload) return '<span class="muted">—</span>';
+  if (!st.files.length) return '<span class="chip todo">Not uploaded</span>';
+  const waiting = st.files.filter(s => !s.feedback).length;
+  return `<span class="chip pass">${st.files.length} file${st.files.length > 1 ? 's' : ''}</span>${waiting ? `<div class="small" style="margin-top:.3rem;color:var(--amber)">${waiting} without your comment</div>` : ''}`;
+}
+
+/* ---------- Progress ---------- */
+async function viewProgress() {
+  loadingFrame();
+  const d = await loadAll();
+  const active = d.students.filter(s => s.active !== false);
+  const events = [
+    ...d.attempts.map(a => ({ when: a.created_at, html: `<b>${esc(d.S.get(a.student_id)?.display_name || '?')}</b> read <a href="#/t/task/${esc(a.task_id)}">${esc(d.T.get(a.task_id)?.title || 'a task')}</a>: ${fmtPct(effScore(a))} ${effScore(a) >= Number(a.pass_mark) ? '<span class="chip pass">pass</span>' : '<span class="chip again">not yet</span>'}` })),
+    ...d.subs.map(s => ({ when: s.created_at, html: `<b>${esc(d.S.get(s.student_id)?.display_name || '?')}</b> uploaded <a href="#/t/task/${esc(s.task_id)}">${esc(s.file_name)}</a> for ${esc(d.T.get(s.task_id)?.title || 'a task')}` }))
+  ].sort((a, b) => b.when.localeCompare(a.when)).slice(0, 10);
+
+  const studentBlock = s => {
+    const tasks = d.tasks.filter(t => t.student_id === s.id && !t.archived);
+    const rows = tasks.map(t => ({ t, pm: passMarkFor(t, s) })).map(x => Object.assign(x, { st: taskState(x.t, d.attempts, d.subs, x.pm) }));
+    const myAttempts = d.attempts.filter(a => a.student_id === s.id);
+    const last = [...myAttempts.map(a => a.created_at), ...d.subs.filter(x => x.student_id === s.id).map(x => x.created_at)].sort().pop();
+    const weekAgo = Date.now() - 7 * 864e5;
+    const thisWeek = myAttempts.filter(a => new Date(a.created_at).getTime() > weekAgo).length;
+    const waiting = d.subs.filter(x => x.student_id === s.id && !x.feedback).length;
+    return `<section class="sheet">
+      <div class="student-head"><h2>${esc(s.display_name)}</h2><span class="muted">username ${esc(s.username)}, pass mark ${s.pass_mark}%</span></div>
+      <div class="stats">
+        <div class="stat"><b>${rows.filter(r => !r.st.done).length}</b><span>tasks not finished</span></div>
+        <div class="stat"><b>${thisWeek}</b><span>read-aloud tries this week</span></div>
+        <div class="stat"><b>${waiting}</b><span>uploads without your comment</span></div>
+        <div class="stat"><b style="font-size:1.05rem;line-height:1.9">${last ? esc(fmtWhen(last)) : 'never'}</b><span>last active</span></div>
+      </div>
+      ${rows.length ? `<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Task</th><th>Read aloud</th><th>Upload</th><th>Last activity</th><th></th></tr></thead><tbody>
+        ${rows.map(({ t, st, pm }) => `<tr>
+          <td data-l="Task"><b>${esc(t.title)}</b>${t.due_date ? `<div class="small muted">Due ${esc(fmtDate(t.due_date))}</div>` : ''}</td>
+          <td data-l="Read aloud">${readCell(t, st, pm)}</td>
+          <td data-l="Upload">${uploadCell(t, st)}</td>
+          <td data-l="Last activity" class="small">${st.last ? esc(fmtWhen(st.last)) : '<span class="muted">—</span>'}</td>
+          <td><a class="btn small" href="#/t/task/${esc(t.id)}">Open</a></td></tr>`).join('')}
+      </tbody></table></div>` : `<p class="muted">No tasks for ${esc(s.display_name)} yet. <a href="#/t/tasks">Assign one</a>.</p>`}
+    </section>`;
+  };
+
+  app.innerHTML = frame(`
+    <div class="row section"><h1 style="margin:0">Progress</h1><span class="spacer"></span><a class="btn primary" href="#/t/tasks">Assign a task</a></div>
+    ${!d.students.length ? `<div class="sheet"><h2>Start here</h2><p>1. <a href="#/t/students">Add your students</a> (name, username, PIN).<br>2. <a href="#/t/passage/new">Add a passage</a> for reading aloud.<br>3. <a href="#/t/tasks">Assign a task</a>.</p></div>` : ''}
+    ${active.map(studentBlock).join('')}
+    ${events.length ? `<section class="sheet"><h2>Latest activity</h2><ul class="feed">${events.map(e => `<li><time>${esc(fmtWhen(e.when))}</time><span>${e.html}</span></li>`).join('')}</ul></section>` : ''}
+  `, { tabs: 'progress', wide: true });
+}
+
+/* ---------- Tasks ---------- */
+async function viewTasks() {
+  loadingFrame();
+  const d = await loadAll();
+  const showArchived = !!state.showArchived;
+  const pre = state.prefillPassage || ''; state.prefillPassage = null;
+  const list = d.tasks.filter(t => showArchived || !t.archived);
+  app.innerHTML = frame(`
+    <h1>Tasks</h1>
+    <section class="sheet">
+      <h2>Assign a task</h2>
+      ${!d.students.length ? '<div class="warn-box">Add a student first on the <a href="#/t/students">Students</a> page.</div>' : ''}
+      <form data-form="task-create">
+        <div class="field"><span style="display:block;font-weight:600;margin-bottom:.3rem">For</span>
+          <div class="row">${d.students.filter(s => s.active !== false).map(s => `<label class="check" style="margin:0 1rem 0 0"><input type="checkbox" name="students" value="${esc(s.id)}"> ${esc(s.display_name)}</label>`).join('') || '<span class="muted">No students yet</span>'}</div>
+          <div class="hint">Tick more than one to give each of them their own copy.</div></div>
+        <label class="field"><span>Title (what the student sees)</span><input name="title" required placeholder="e.g. Article 15"
+          value="${pre && d.P.get(pre) ? esc(d.P.get(pre).title) : ''}"></label>
+        <div class="field"><span style="display:block;font-weight:600;margin-bottom:.3rem">Text to read aloud</span>
+          <select name="passage_id" data-change="task-passage" aria-label="Text to read aloud">
+            <option value="new" ${pre ? '' : 'selected'}>Paste the text below</option>
+            <option value="">No reading aloud</option>
+            ${d.passages.length ? `<optgroup label="Or use a text you saved before">${d.passages.map(p => `<option value="${esc(p.id)}" ${pre === p.id ? 'selected' : ''}>${esc(p.title)} (${Scoring.wordCount(p.body)} words)</option>`).join('')}</optgroup>` : ''}
+          </select>
+          <div id="new-passage" class="${pre ? 'hidden' : ''}" style="margin-top:.6rem;margin-bottom:1.4rem">
+            <textarea name="passage_body" data-input="task-text-count" style="min-height:12rem" placeholder="Paste the text the student reads aloud. Leave an empty line between paragraphs."></textarea>
+            <div class="hint" id="task-wc">It is also kept on the Passages page, so you can use it again.</div>
+            <details style="margin-top:.5rem"><summary style="cursor:pointer;font-weight:600">Key words with meanings (optional)</summary>
+              <textarea name="passage_glossary" style="min-height:5rem;margin-top:.4rem" placeholder="One per line, for example:\ncrammed = 擠迫 (too full)"></textarea>
+              <div class="hint">The student taps these words to see the meaning.</div></details>
+          </div>
+        </div>
+        <label class="field"><span>Questions for the student (optional)</span>
+          <textarea name="exercise_text" style="min-height:9rem" placeholder="Paste the questions here. The student sees them on his task page, under the text."></textarea></label>
+        <label class="check"><input type="checkbox" name="needs_upload"> The student uploads his answers (PDF or photo)</label>
+        <label class="field"><span>Instructions (optional)</span><textarea name="instructions" style="min-height:3rem" placeholder="e.g. Answer the questions on paper, then upload a photo."></textarea></label>
+        <div class="grid2">
+          <label class="field"><span>Pass mark for reading aloud (%)</span><input name="pass_mark" type="number" min="0" max="100" placeholder="Leave empty: use the student's own"></label>
+          <label class="field"><span>Due date (optional)</span><input name="due_date" type="date"></label>
+        </div>
+        <details class="field"><summary style="cursor:pointer;font-weight:600">Attach a file as well (optional)</summary>
+          <input name="attachment" type="file" style="margin-top:.5rem"><div class="hint">For a worksheet the student downloads.</div></details>
+        <div class="form-actions"><button class="btn primary">Assign task</button></div>
+      </form>
+    </section>
+    <section class="sheet">
+      <div class="row"><h2 style="margin:0">All tasks</h2><span class="spacer"></span>
+        <label class="check" style="margin:0"><input type="checkbox" data-change="show-archived" ${showArchived ? 'checked' : ''}> Show archived</label></div>
+      ${list.length ? `<div class="tblwrap"><table class="tbl stack" style="margin-top:.8rem"><thead><tr><th>Student</th><th>Task</th><th>Parts</th><th>Status</th><th>Created</th><th></th></tr></thead><tbody>
+        ${list.map(t => {
+          const s = d.S.get(t.student_id), pm = passMarkFor(t, s), st = taskState(t, d.attempts, d.subs, pm);
+          const parts = [t.passage_id ? `Read aloud (${pm}%)` : '', t.exercise_text ? 'Questions' : '', t.needs_upload ? 'Upload' : '', t.attachment_path ? 'File' : ''].filter(Boolean).join(', ');
+          return `<tr>
+            <td data-l="Student">${esc(s ? s.display_name : '?')}</td>
+            <td data-l="Task"><b>${esc(t.title)}</b>${t.archived ? ' <span class="chip todo">archived</span>' : ''}</td>
+            <td data-l="Parts" class="small">${esc(parts)}</td>
+            <td data-l="Status">${st.done ? '<span class="chip pass">Done</span>' : st.read === 'again' ? '<span class="chip again">Trying</span>' : '<span class="chip todo">To do</span>'}</td>
+            <td data-l="Created" class="small">${esc(fmtWhen(t.created_at))}</td>
+            <td><div class="row" style="gap:.4rem"><a class="btn small" href="#/t/task/${esc(t.id)}">Open</a>
+              <button class="btn small" data-act="task-archive" data-id="${esc(t.id)}" data-v="${t.archived ? '0' : '1'}">${t.archived ? 'Unarchive' : 'Archive'}</button></div></td></tr>`;
+        }).join('')}
+      </tbody></table></div>` : '<p class="muted" style="margin-top:.8rem">No tasks yet.</p>'}
+    </section>
+  `, { tabs: 'tasks', wide: true });
+  state.tdata = d;
+}
+
+/* ---------- one task (teacher) ---------- */
+async function viewTeacherTask(id) {
+  loadingFrame();
+  const d = await loadAll();
+  const task = d.T.get(id);
+  if (!task) { app.innerHTML = frame('<div class="sheet"><p>This task was deleted.</p><a class="btn" href="#/t/progress">Back to Progress</a></div>', { tabs: 'progress' }); return; }
+  const [attempts, subs] = await Promise.all([db.listAttempts({ taskId: id, full: true }), db.listSubmissions({ taskId: id })]);
+  const s = d.S.get(task.student_id), pm = passMarkFor(task, s), st = taskState(task, attempts, subs, pm);
+  const passage = task.passage_id ? d.P.get(task.passage_id) : null;
+  state.view = { teacher: true, task, student: s, attempts, subs, d, pm };
+
+  const attemptHTML = (a, n) => {
+    const eff = effScore(a), passed = eff >= Number(a.pass_mark);
+    const res = Scoring.unpack(a.passage_text, a.word_results);
+    const changed = a.teacher_score !== null && a.teacher_score !== undefined;
+    return `<details class="attempt" data-attempt="${esc(a.id)}">
+      <summary><b>Try ${n}</b><span class="muted small">${esc(fmtWhen(a.created_at))}</span>
+        <span style="font-weight:700;font-size:1.1rem">${fmtPct(eff)}</span>
+        ${passed ? '<span class="chip pass">passed</span>' : '<span class="chip again">not passed</span>'}
+        ${changed ? `<span class="chip info">you changed it (computer: ${fmtPct(a.score)})</span>` : ''}
+        <span class="small muted">${fmtDur(a.duration_sec)}${a.audio_path ? '' : ', no sound file'}</span></summary>
+      <div class="body">
+        <div class="row" style="margin-bottom:.8rem">
+          ${a.audio_path ? `<span data-audio="${esc(a.id)}"><button class="btn small" data-act="t-audio" data-id="${esc(a.id)}">${ICON.play} Play the recording</button></span>` : '<span class="small muted">No sound file was saved for this try.</span>'}
+          <span class="small muted">${esc(a.device || '')}</span>
+        </div>
+        <div class="legend"><span><span class="w ok">yellow</span> = heard correctly</span><span><span class="w wrong">red<span class="heard">heard</span></span> = heard another word (tap it to accept that word)</span><span><span class="w missed">dotted</span> = not heard</span></div>
+        ${passageHTML(a.passage_text, res.words, { showHeard: true })}
+        ${res.extras.length ? `<p class="small"><b>Extra words heard:</b> ${esc(res.extras.join(', '))}</p>` : ''}
+        <p class="small" style="margin-bottom:.3rem"><b>Everything the computer heard:</b></p>
+        <div class="transcript">${esc(a.transcript || '(nothing)')}</div>
+        <form class="inline-form" data-form="t-mark" data-id="${esc(a.id)}" style="margin-top:1rem">
+          <label class="field"><span>Your mark (%)</span><input type="number" name="teacher_score" min="0" max="100" step="0.1" value="${changed ? esc(a.teacher_score) : ''}" placeholder="${esc(a.score)}"></label>
+          <label class="field" style="flex:1;min-width:200px"><span>Note (only you see it)</span><input name="teacher_note" value="${esc(a.teacher_note || '')}"></label>
+          <button class="btn primary small">Save mark</button>
+        </form>
+        <div class="row" style="margin-top:.8rem">
+          <button class="btn small" data-act="t-rescore" data-id="${esc(a.id)}">Mark again with the current word rules</button>
+          <button class="btn small danger" data-act="t-del-attempt" data-id="${esc(a.id)}">Delete this try</button>
+        </div>
+      </div></details>`;
+  };
+
+  app.innerHTML = frame(`
+    <a class="back" href="#/t/progress">← Progress</a>
+    <div class="row top"><div><h1 style="margin-bottom:.2rem">${esc(task.title)}</h1>
+      <p class="muted">For <b>${esc(s ? s.display_name : '?')}</b>, created ${esc(fmtWhen(task.created_at))}${task.due_date ? `, due ${esc(fmtDate(task.due_date))}` : ''}</p></div>
+      <span class="spacer"></span>${st.done ? '<span class="chip pass">Done</span>' : st.read === 'again' ? '<span class="chip again">Not passed yet</span>' : '<span class="chip todo">To do</span>'}</div>
+
+    <details class="sheet"><summary style="cursor:pointer;font-weight:700">Edit this task</summary>
+      <form data-form="task-edit" data-id="${esc(task.id)}" style="margin-top:1rem">
+        <label class="field"><span>Title</span><input name="title" value="${esc(task.title)}" required></label>
+        <label class="field"><span>Instructions</span><textarea name="instructions" style="min-height:3rem">${esc(task.instructions)}</textarea></label>
+        <label class="field"><span>Questions for the student</span><textarea name="exercise_text" style="min-height:9rem">${esc(task.exercise_text || '')}</textarea></label>
+        <div class="grid2">
+          <label class="field"><span>Passage to read aloud</span><select name="passage_id"><option value="">No reading aloud</option>
+            ${d.passages.map(p => `<option value="${esc(p.id)}" ${p.id === task.passage_id ? 'selected' : ''}>${esc(p.title)}</option>`).join('')}</select></label>
+          <label class="field"><span>Pass mark (%)</span><input name="pass_mark" type="number" min="0" max="100" value="${task.pass_mark ?? ''}" placeholder="Student's own: ${s ? s.pass_mark : 90}"></label>
+          <label class="field"><span>Due date</span><input name="due_date" type="date" value="${esc(task.due_date || '')}"></label>
+        </div>
+        <label class="check"><input type="checkbox" name="needs_upload" ${task.needs_upload ? 'checked' : ''}> The student uploads his answers</label>
+        <label class="check"><input type="checkbox" name="archived" ${task.archived ? 'checked' : ''}> Archived (hidden from the student)</label>
+        <div class="form-actions"><button class="btn primary">Save changes</button>
+          <button type="button" class="btn danger" data-act="task-delete" data-id="${esc(task.id)}">Delete task</button></div>
+      </form>
+      ${task.passage_id ? `<p class="small" style="margin-top:1rem">To change the reading text, <a href="#/t/passage/${esc(task.passage_id)}">edit the passage</a>.</p>` : ''}
+      ${task.attachment_path ? `<p class="small" style="margin-top:1rem">Exercise file: <button class="linkbtn" data-act="t-open-material">${esc(task.attachment_name || 'open')}</button></p>` : ''}
+    </details>
+
+    ${(passage || attempts.length) ? `<section class="sheet"><h2>Read aloud</h2>
+      <p class="muted">${passage ? `Passage: ${esc(passage.title)} (${Scoring.wordCount(passage.body)} words). ` : ''}Pass mark ${pm}%. Best ${st.best !== null ? fmtPct(st.best) : '—'} after ${attempts.length} ${attempts.length === 1 ? 'try' : 'tries'}.</p>
+      ${attempts.length ? `<div style="margin:.4rem 0 1rem">${triesHTML(st, pm)}</div>` + attempts.map((a, i) => ({ a, n: i + 1 })).reverse().map(x => attemptHTML(x.a, x.n)).join('') : '<p>No tries yet.</p>'}
+    </section>` : ''}
+
+    ${task.needs_upload || subs.length ? `<section class="sheet"><h2>Uploaded answers</h2>
+      ${subs.length ? `<ul class="filelist">${subs.slice().reverse().map(x => `<li>
+        <div class="row"><b>${esc(x.file_name)}</b><span class="muted small">${esc(fmtWhen(x.created_at))}</span><span class="spacer"></span>
+          <button class="btn small" data-act="t-open-sub" data-id="${esc(x.id)}">${ICON.download} Open</button>
+          <button class="btn small danger" data-act="t-del-sub" data-id="${esc(x.id)}">Delete</button></div>
+        <form data-form="t-feedback" data-id="${esc(x.id)}" style="margin-top:.7rem">
+          <label class="field" style="margin-bottom:.5rem"><span>Comment for ${esc(s ? s.display_name : 'the student')} (he sees this)</span>
+            <textarea name="feedback" style="min-height:4.5rem" placeholder="e.g. Q2 wrong: look at paragraph 3 again.">${esc(x.feedback || '')}</textarea></label>
+          <button class="btn small primary">Save comment</button>${x.feedback_at ? ` <span class="small muted">saved ${esc(fmtWhen(x.feedback_at))}</span>` : ''}
+        </form></li>`).join('')}</ul>` : '<p>Nothing uploaded yet.</p>'}
+    </section>` : ''}
+  `, { tabs: 'progress', wide: true });
+}
+
+/* tap a red word in an attempt: accept it */
+function onTeacherWord(w) {
+  const det = w.closest('[data-attempt]');
+  const a = state.view.attempts.find(x => x.id === det.dataset.attempt);
+  if (!a || !w.classList.contains('wrong')) {
+    Speech.speak(Scoring.cleanWord(w.firstChild.textContent), { rate: 0.85, lang: CFG.SPEECH_LANG });
+    return;
+  }
+  const expected = Scoring.cleanWord(w.firstChild.textContent).toLowerCase();
+  const heard = w.querySelector('.heard').textContent;
+  const s = state.view.student;
+  const dlg = document.createElement('dialog');
+  dlg.innerHTML = `<form method="dialog" data-dialog="accept">
+    <h3>Accept “${esc(heard)}” for “${esc(expected)}”?</h3>
+    <p class="small">Do this when the student read the word well but the computer wrote something else, for example a name or his accent.</p>
+    <label class="check"><input type="radio" name="who" value="one" checked> Only for ${esc(s ? s.display_name : 'this student')}</label>
+    <label class="check"><input type="radio" name="who" value="all"> For all students</label>
+    <label class="check"><input type="checkbox" name="rescore" checked> Mark this try again now</label>
+    <div class="form-actions"><button class="btn primary" value="ok">Accept</button><button class="btn" value="cancel">Cancel</button></div>
+  </form>`;
+  document.body.appendChild(dlg);
+  dlg.addEventListener('close', async () => {
+    const f = dlg.querySelector('form'), ok = dlg.returnValue === 'ok';
+    const who = f.who.value, rescore = f.rescore.checked;
+    dlg.remove();
+    if (!ok) return;
+    try {
+      await db.addAccepted({ student_id: who === 'all' ? null : a.student_id, expected, heard });
+      toast('Word rule added');
+      if (rescore) await rescoreAttempt(a.id, true);
+      else render();
+    } catch (err) { toast(err.message, true); }
+  });
+  dlg.showModal();
+}
+async function rescoreAttempt(id, keepOpen) {
+  const v = state.view, a = v.attempts.find(x => x.id === id), before = Number(a.score);
+  const accepted = (await db.listAccepted()).filter(r => !r.student_id || r.student_id === a.student_id);
+  const r = Scoring.score(a.passage_text, a.transcript, accepted);
+  await db.updateAttempt(id, { score: r.score, passed: r.score >= Number(a.pass_mark), word_results: Scoring.pack(r) });
+  toast(`Marked again: ${fmtPct(r.score)} (was ${fmtPct(before)})`);
+  await render();
+  if (keepOpen) { const el = document.querySelector(`[data-attempt="${CSS.escape(id)}"]`); if (el) { el.open = true; el.scrollIntoView({ block: 'start' }); } }
+}
+
+/* ---------- Passages ---------- */
+async function viewPassages() {
+  loadingFrame();
+  const [passages, tasks] = await Promise.all([db.listPassages(), db.listTasks()]);
+  app.innerHTML = frame(`
+    <div class="row section"><h1 style="margin:0">Passages</h1><span class="spacer"></span><a class="btn primary" href="#/t/passage/new">New passage</a></div>
+    <section class="sheet">
+      ${passages.length ? `<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Title</th><th class="num">Words</th><th class="num">Key words</th><th class="num">Used in tasks</th><th>Changed</th><th></th></tr></thead><tbody>
+        ${passages.map(p => `<tr><td data-l="Title"><b>${esc(p.title)}</b></td>
+          <td data-l="Words" class="num">${Scoring.wordCount(p.body)}</td>
+          <td data-l="Key words" class="num">${parseGlossary(p.glossary).size}</td>
+          <td data-l="Used in tasks" class="num">${tasks.filter(t => t.passage_id === p.id).length}</td>
+          <td data-l="Changed" class="small">${esc(fmtWhen(p.updated_at || p.created_at))}</td>
+          <td><div class="row" style="gap:.4rem"><a class="btn small" href="#/t/passage/${esc(p.id)}">Edit</a>
+            <button class="btn small" data-act="passage-assign" data-id="${esc(p.id)}">Assign</button></div></td></tr>`).join('')}
+      </tbody></table></div>` : '<p>No passages yet. Add the first one with <b>New passage</b>.</p>'}
+    </section>`, { tabs: 'passages', wide: true });
+}
+async function viewPassageEdit(id) {
+  loadingFrame();
+  const isNew = !id || id === 'new';
+  const p = isNew ? { title: '', body: '', glossary: '' } : await db.getPassage(id);
+  if (!p) return go('#/t/passages');
+  app.innerHTML = frame(`
+    <a class="back" href="#/t/passages">← Passages</a>
+    <h1>${isNew ? 'New passage' : 'Edit passage'}</h1>
+    <form class="sheet" data-form="passage-save" data-id="${isNew ? '' : esc(p.id)}">
+      <label class="field"><span>Title</span><input name="title" value="${esc(p.title)}" required></label>
+      <label class="field"><span>Text the student reads aloud</span>
+        <textarea name="body" data-input="passage-preview" style="min-height:14rem" required placeholder="Paste the passage here. Leave an empty line between paragraphs.">${esc(p.body)}</textarea>
+        <span class="hint" id="wc"></span></label>
+      <label class="field"><span>Key words with meanings (optional)</span>
+        <textarea name="glossary" data-input="passage-preview" style="min-height:7rem" placeholder="One per line, for example:\ncrammed = 擠迫 (too full)\npoke fun at = 取笑">${esc(p.glossary)}</textarea>
+        <span class="hint">The student taps these words to see the meaning. Phrases of up to four words work too.</span></label>
+      ${!isNew ? '<div class="note-box">Changing the text does not change old tries: each try keeps the text it was marked against.</div>' : ''}
+      <div class="form-actions"><button class="btn primary">Save passage</button>
+        ${!isNew ? `<button type="button" class="btn" data-act="passage-assign" data-id="${esc(p.id)}">Assign it</button>
+        <button type="button" class="btn danger" data-act="passage-delete" data-id="${esc(p.id)}">Delete</button>` : ''}</div>
+    </form>
+    <section class="sheet"><h2>Preview: what the student sees</h2><div id="preview"></div></section>
+  `, { tabs: 'passages', wide: true });
+  state.view = { teacher: true, gloss: parseGlossary(p.glossary) };
+  updatePreview();
+}
+function updatePreview() {
+  const f = $('form[data-form="passage-save"]'); if (!f) return;
+  const body = f.body.value, gl = parseGlossary(f.glossary.value);
+  state.view && (state.view.gloss = gl);
+  $('#wc').textContent = `${Scoring.wordCount(body)} words. About ${Math.max(1, Math.round(Scoring.wordCount(body) / 90))} min to read for a slow reader.`;
+  $('#preview').innerHTML = body.trim() ? passageHTML(body, null, { glossary: gl }) : '<p class="muted">The passage will show here.</p>';
+}
+let previewTimer = null;
+const inputs = {
+  'passage-preview': () => { clearTimeout(previewTimer); previewTimer = setTimeout(updatePreview, 250); },
+  'task-text-count': el => {
+    const n = Scoring.wordCount(el.value), hint = $('#task-wc');
+    if (hint) hint.textContent = n ? `${n} words. It is also kept on the Passages page, so you can use it again.` : 'It is also kept on the Passages page, so you can use it again.';
+  }
+};
+
+/* ---------- Students ---------- */
+async function viewStudents() {
+  loadingFrame();
+  const students = await db.listStudents();
+  app.innerHTML = frame(`
+    <h1>Students</h1>
+    <section class="sheet">
+      ${students.length ? `<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Name</th><th>Username</th><th>Pass mark</th><th>Account</th><th></th></tr></thead><tbody>
+        ${students.map(s => `<tr>
+          <td data-l="Name"><b>${esc(s.display_name)}</b></td>
+          <td data-l="Username">${esc(s.username)}</td>
+          <td data-l="Pass mark"><form class="inline-form" data-form="student-pm" data-id="${esc(s.id)}"><input type="number" name="pass_mark" min="0" max="100" value="${s.pass_mark}" aria-label="Pass mark for ${esc(s.display_name)}"><button class="btn small">Save</button></form></td>
+          <td data-l="Account">${s.active === false ? '<span class="chip todo">paused</span>' : '<span class="chip pass">active</span>'}</td>
+          <td><div class="row" style="gap:.4rem"><button class="btn small" data-act="student-pin" data-id="${esc(s.id)}" data-name="${esc(s.display_name)}">New PIN</button>
+            <button class="btn small" data-act="student-active" data-id="${esc(s.id)}" data-v="${s.active === false ? '1' : '0'}">${s.active === false ? 'Turn on' : 'Pause'}</button></div></td></tr>`).join('')}
+      </tbody></table></div>
+      <p class="hint" style="margin-top:.8rem">The pass mark is used for every task of that student, unless a task has its own pass mark.</p>` : '<p>No students yet.</p>'}
+    </section>
+    <section class="sheet">
+      <h2>Add a student</h2>
+      <form data-form="student-add">
+        <div class="grid2">
+          <label class="field"><span>Name</span><input name="name" required placeholder="Jackson"></label>
+          <label class="field"><span>Username (for logging in)</span><input name="username" required pattern="[a-z0-9._\\-]{2,24}" autocapitalize="none" spellcheck="false" placeholder="jackson">
+            <span class="hint">Small letters and numbers only, no spaces.</span></label>
+          <label class="field"><span>PIN (6 digits)</span><input name="pin" required pattern="[0-9]{6}" inputmode="numeric" placeholder="e.g. 482915">
+            <span class="hint">Write it down for the student. You can set a new one later.</span></label>
+          <label class="field"><span>Pass mark (%)</span><input name="pass_mark" type="number" min="0" max="100" value="90" required></label>
+        </div>
+        <div class="form-actions"><button class="btn primary">Add student</button></div>
+      </form>
+    </section>
+    <section class="sheet">
+      <h2>Your teacher account</h2>
+      <p>You log in with the login name <b>${esc(state.me.username || '')}</b>. Students can't open these pages without your password.</p>
+      <form data-form="teacher-password" class="grid2">
+        <label class="field"><span>New password (at least 8 characters)</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+        <label class="field"><span>Type it again</span><input name="password2" type="password" minlength="8" autocomplete="new-password" required></label>
+        <div class="form-actions"><button class="btn">Change password</button></div>
+      </form>
+    </section>`, { tabs: 'students', wide: true });
+}
+
+/* ---------- Word rules ---------- */
+async function viewWordRules() {
+  loadingFrame();
+  const [rules, students] = await Promise.all([db.listAccepted(), db.listStudents()]);
+  const S = new Map(students.map(s => [s.id, s]));
+  app.innerHTML = frame(`
+    <h1>Word rules</h1>
+    <div class="note-box">The speech recognition sometimes writes a different word even when the student read well (names, Cantonese words, his accent).
+      A word rule tells the marking to accept it. The quickest way to add one: open a try on a task page and tap the red word.
+      Numbers, “don't / do not”, British and American spelling and words that sound the same (two / too, read / red) are accepted already.</div>
+    <section class="sheet">
+      <h2>Add a rule</h2>
+      <form data-form="rule-add" class="grid2">
+        <label class="field"><span>Word in the passage</span><input name="expected" required placeholder="they"></label>
+        <label class="field"><span>Also accept when the computer hears</span><input name="heard" required placeholder="day"></label>
+        <label class="field"><span>For</span><select name="student_id"><option value="">All students</option>${students.map(s => `<option value="${esc(s.id)}">${esc(s.display_name)} only</option>`).join('')}</select></label>
+        <div class="form-actions" style="align-self:end;margin-bottom:.9rem"><button class="btn primary">Add rule</button></div>
+      </form>
+    </section>
+    <section class="sheet">
+      <h2>Rules (${rules.length})</h2>
+      ${rules.length ? `<div class="tblwrap"><table class="tbl stack"><thead><tr><th>Passage word</th><th>Accept</th><th>For</th><th>Added</th><th></th></tr></thead><tbody>
+        ${rules.map(r => `<tr><td data-l="Passage word"><b>${esc(r.expected)}</b></td><td data-l="Accept">${esc(r.heard)}</td>
+          <td data-l="For">${r.student_id ? esc(S.get(r.student_id)?.display_name || '?') : 'All students'}</td>
+          <td data-l="Added" class="small">${esc(fmtWhen(r.created_at))}</td>
+          <td><button class="btn small danger" data-act="rule-del" data-id="${esc(r.id)}">Remove</button></td></tr>`).join('')}
+      </tbody></table></div>` : '<p class="muted">No rules yet.</p>'}
+    </section>`, { tabs: 'words', wide: true });
+}
+
+/* ---------- teacher actions ---------- */
+Object.assign(actions, {
+  'task-archive': async el => busy(el, async () => { await db.updateTask(el.dataset.id, { archived: el.dataset.v === '1' }); await render(); }),
+  'task-delete': async el => {
+    if (!confirm('Delete this task, all its tries, recordings and uploaded files? This cannot be undone.')) return;
+    await busy(el, async () => { await db.deleteTask(el.dataset.id); toast('Task deleted'); go('#/t/progress'); });
+  },
+  't-audio': async el => busy(el, async () => {
+    const a = state.view.attempts.find(x => x.id === el.dataset.id);
+    const url = await db.fileUrl('recordings', a.audio_path);
+    const holder = el.closest('[data-audio]');
+    holder.innerHTML = `<audio controls autoplay preload="auto" src="${esc(url)}" style="max-width:100%"></audio>`;
+  }),
+  't-rescore': async el => busy(el, () => rescoreAttempt(el.dataset.id, true)),
+  't-del-attempt': async el => {
+    if (!confirm('Delete this try and its recording?')) return;
+    await busy(el, async () => { await db.deleteAttempt(state.view.attempts.find(x => x.id === el.dataset.id)); toast('Try deleted'); await render(); });
+  },
+  't-open-sub': async el => busy(el, async () => {
+    const s = state.view.subs.find(x => x.id === el.dataset.id);
+    window.open(await db.fileUrl('submissions', s.file_path), '_blank');
+  }),
+  't-del-sub': async el => {
+    if (!confirm('Delete this uploaded file?')) return;
+    await busy(el, async () => { await db.deleteSubmission(state.view.subs.find(x => x.id === el.dataset.id)); toast('File deleted'); await render(); });
+  },
+  't-open-material': async el => busy(el, async () => { window.open(await db.fileUrl('materials', state.view.task.attachment_path), '_blank'); }),
+  'passage-assign': el => { state.prefillPassage = el.dataset.id; go('#/t/tasks'); },
+  'passage-delete': async el => {
+    if (!confirm('Delete this passage? Tasks that use it will no longer have reading aloud. Old tries are kept.')) return;
+    await busy(el, async () => { await db.deletePassage(el.dataset.id); toast('Passage deleted'); go('#/t/passages'); });
+  },
+  'student-active': async el => busy(el, async () => { await db.updateStudent(el.dataset.id, { active: el.dataset.v === '1' }); await render(); }),
+  'student-pin': async el => {
+    const pin = prompt(`New 6-digit PIN for ${el.dataset.name}:`);
+    if (pin === null) return;
+    if (!/^\d{6}$/.test(pin.trim())) { toast('The PIN must be exactly 6 digits.', true); return; }
+    await busy(el, async () => { await db.setStudentPin(el.dataset.id, pin.trim()); toast(`New PIN saved for ${el.dataset.name}`); });
+  },
+  'rule-del': async el => busy(el, async () => { await db.deleteAccepted(el.dataset.id); await render(); })
+});
+Object.assign(changes, {
+  'show-archived': el => { state.showArchived = el.checked; render(); },
+  'task-passage': el => {
+    const f = el.form, d = state.tdata; if (!f || !d) return;
+    $('#new-passage').classList.toggle('hidden', el.value !== 'new');
+    const p = d.P.get(el.value);
+    if (p && (!f.title.value || f.dataset.autoTitle === f.title.value)) { f.title.value = p.title; f.dataset.autoTitle = p.title; }
+  }
+});
+Object.assign(forms, {
+  'task-create': async f => {
+    const fd = new FormData(f), btn = $('button.primary', f);
+    const studentIds = fd.getAll('students');
+    if (!studentIds.length) { toast('Tick at least one student.', true); return; }
+    const title = String(fd.get('title') || '').trim();
+    const sel = String(fd.get('passage_id') || '');
+    const body = String(fd.get('passage_body') || '').replace(/\r/g, '').trim();
+    const exercise_text = String(fd.get('exercise_text') || '').replace(/\r/g, '').trim();
+    const needs_upload = !!fd.get('needs_upload');
+    const file = f.attachment.files[0];
+    const newText = sel === 'new' && !!body;
+    let passage_id = sel && sel !== 'new' ? sel : null;
+    if (!passage_id && !newText && !exercise_text && !needs_upload && !file) {
+      toast('Paste a text to read aloud or some questions, or tick "uploads his answers".', true); return;
+    }
+    await busy(btn, async () => {
+      if (newText) passage_id = await db.savePassage({ title, body, glossary: String(fd.get('passage_glossary') || '').trim() });
+      let attachment_path = null, attachment_name = null;
+      if (file) { attachment_path = await db.uploadMaterial(file); attachment_name = file.name; }
+      const pmRaw = String(fd.get('pass_mark') || '').trim();
+      for (const sid of studentIds) {
+        await db.createTask({
+          student_id: sid, title, instructions: String(fd.get('instructions') || '').trim(), exercise_text,
+          passage_id, needs_upload, pass_mark: pmRaw === '' ? null : Math.max(0, Math.min(100, Number(pmRaw))),
+          due_date: fd.get('due_date') || null, attachment_path, attachment_name
+        });
+      }
+      toast(studentIds.length > 1 ? `Task given to ${studentIds.length} students` : 'Task assigned');
+      await render();
+    });
+  },
+  'task-edit': async f => {
+    const fd = new FormData(f);
+    await busy($('button.primary', f), async () => {
+      const pmRaw = String(fd.get('pass_mark') || '').trim();
+      await db.updateTask(f.dataset.id, {
+        title: String(fd.get('title')).trim(), instructions: String(fd.get('instructions') || '').trim(),
+        exercise_text: String(fd.get('exercise_text') || '').replace(/\r/g, '').trim(),
+        passage_id: fd.get('passage_id') || null, pass_mark: pmRaw === '' ? null : Math.max(0, Math.min(100, Number(pmRaw))),
+        due_date: fd.get('due_date') || null, needs_upload: !!fd.get('needs_upload'), archived: !!fd.get('archived')
+      });
+      toast('Task saved'); await render();
+    });
+  },
+  't-mark': async f => {
+    const fd = new FormData(f), raw = String(fd.get('teacher_score') || '').trim();
+    const a = state.view.attempts.find(x => x.id === f.dataset.id);
+    await busy($('button', f), async () => {
+      const ts = raw === '' ? null : Math.max(0, Math.min(100, Number(raw)));
+      const eff = ts === null ? Number(a.score) : ts;
+      await db.updateAttempt(a.id, { teacher_score: ts, teacher_note: String(fd.get('teacher_note') || '').trim() || null, passed: eff >= Number(a.pass_mark) });
+      toast(ts === null ? 'Back to the computer mark' : 'Mark saved');
+      await render();
+      const el = document.querySelector(`[data-attempt="${CSS.escape(a.id)}"]`); if (el) el.open = true;
+    });
+  },
+  't-feedback': async f => {
+    const fd = new FormData(f);
+    await busy($('button', f), async () => {
+      const fb = String(fd.get('feedback') || '').trim();
+      await db.updateSubmission(f.dataset.id, { feedback: fb || null, feedback_at: fb ? new Date().toISOString() : null });
+      toast('Comment saved. The student can see it.');
+      await render();
+    });
+  },
+  'passage-save': async f => {
+    const fd = new FormData(f);
+    await busy($('button.primary', f), async () => {
+      const id = await db.savePassage({ id: f.dataset.id || null, title: String(fd.get('title')).trim(), body: String(fd.get('body')).replace(/\r/g, '').trim(), glossary: String(fd.get('glossary') || '').trim() });
+      toast('Passage saved');
+      if (!f.dataset.id) go('#/t/passage/' + id);
+    });
+  },
+  'student-add': async f => {
+    const fd = new FormData(f);
+    const name = String(fd.get('name')).trim(), username = String(fd.get('username')).trim().toLowerCase(), pin = String(fd.get('pin')).trim();
+    if (!USERNAME_RE.test(username)) { toast('The username can only have small letters, numbers, dots, dashes and underscores.', true); return; }
+    if (!/^\d{6}$/.test(pin)) { toast('The PIN must be exactly 6 digits.', true); return; }
+    await busy($('button', f), async () => {
+      await db.addStudent({ name, username, pin, passMark: Number(fd.get('pass_mark')) || 90 });
+      toast(`${name} added. Username: ${username}`);
+      await render();
+    });
+  },
+  'student-pm': async f => {
+    const v = Math.max(0, Math.min(100, Number(new FormData(f).get('pass_mark'))));
+    await busy($('button', f), async () => { await db.updateStudent(f.dataset.id, { pass_mark: v }); toast('Pass mark saved'); });
+  },
+  'teacher-password': async f => {
+    const fd = new FormData(f), pw = String(fd.get('password') || '');
+    if (pw.length < 8) { toast('The password needs at least 8 characters.', true); return; }
+    if (pw !== String(fd.get('password2') || '')) { toast('The two passwords are not the same.', true); return; }
+    await busy($('button', f), async () => { await db.changePassword(pw); f.reset(); toast('Password changed'); });
+  },
+  'rule-add': async f => {
+    const fd = new FormData(f);
+    await busy($('button', f), async () => {
+      await db.addAccepted({ expected: String(fd.get('expected')).trim().toLowerCase(), heard: String(fd.get('heard')).trim().toLowerCase(), student_id: fd.get('student_id') || null });
+      toast('Rule added'); await render();
+    });
+  }
+});
+
+/* ---------- start ---------- */
+render();
+
+</script>
+</body>
+</html>
